@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Animal {
+public enum Animal {
     case rat
     case cat
     case dog

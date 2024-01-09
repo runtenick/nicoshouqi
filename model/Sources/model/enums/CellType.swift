@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CellType {
+public enum CellType {
     case unknown // default value and for debugging
     case jungle
     case water

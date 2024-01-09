@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum Owner : CustomStringConvertible {
+public enum Owner : CustomStringConvertible {
     case noOne // for the empty cells
     case player1
     case player2
     
-    var description: String {
+    public var description: String {
         switch self {
             case .noOne:
                 return "x"
