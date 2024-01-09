@@ -10,8 +10,7 @@ import Foundation
 public struct Cell: CustomStringConvertible {
     let cellType: CellType
     let initialOwner: Owner
-    // piece is then optional so I might have to do
-    // "if let ..." when using this attribute
+    // piece is optional so I might have to do "if let ..." when using this attribute
     let piece: Piece?
     
     public init(cellType: CellType, initialOwner: Owner = .noOne, piece: Piece? = nil) {
@@ -21,11 +20,11 @@ public struct Cell: CustomStringConvertible {
     }
     
     public var description: String {
-        let str = "on \(self.cellType), \(self.initialOwner)"
         if let piece = self.piece {
-            return "\(piece) \(str)"
+            // piece + real onwer
+            return "\(piece) on \(self.cellType), \(piece.owner)"
         } else {
-            return "ø \(str)"
+            return "ø on \(self.cellType), \(self.initialOwner)"
         }
     }
 }
