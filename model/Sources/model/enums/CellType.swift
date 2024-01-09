@@ -8,7 +8,7 @@
 import Foundation
 
 enum CellType {
-    case unknown
+    case unknown // default value and for debugging
     case jungle
     case water
     case trap
