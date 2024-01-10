@@ -2,12 +2,15 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Models">
+   </FileRef>
+   <FileRef
+      location = "group:cli-doshou/cli-doshou.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:ModelExtensionEmoji">
    </FileRef>
    <FileRef
       location = "group:playground.playground">
-   </FileRef>
-   <FileRef
-      location = "group:model">
    </FileRef>
 </Workspace>

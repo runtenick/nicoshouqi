@@ -1,5 +1,4 @@
-import model
-
+/*
 
 let piece = Piece(owner: .player1, animal: .rat)
 print(piece)
@@ -47,3 +46,4 @@ public extension Animal {
 let animal = Animal.cat
 print(animal.symbol)
 
+*/

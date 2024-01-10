@@ -6,8 +6,7 @@
 //
 
 import Foundation
-
-import model
+import Models
 
 public extension CellType {
     let symbol: String {
@@ -25,3 +24,4 @@ public extension CellType {
         }
     }
 }
+

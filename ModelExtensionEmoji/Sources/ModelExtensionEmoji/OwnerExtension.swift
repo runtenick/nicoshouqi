@@ -7,16 +7,18 @@
 
 import Foundation
 
-import model
+import Models
+
 
 extension Owner {
     var symbol: String {
         switch self {
         case .noOne: return " "
-        case .player1 return "🟡"
-        case .player2 return "🔴"
+        case .player1: return "🟡"
+        case .player2: return "🔴"
         }
     }
 }
+
 
 
