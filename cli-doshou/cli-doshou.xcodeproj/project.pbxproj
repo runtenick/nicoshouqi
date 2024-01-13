@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC3A8E0E2B52F1FC00A47F05 /* ModelExtensionEmoji in Frameworks */ = {isa = PBXBuildFile; productRef = EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */; };
 		ECE2BE802B4EA72C00D222A2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2BE7F2B4EA72C00D222A2 /* main.swift */; };
 		ECE2BE8A2B4EAF8100D222A2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2BE892B4EAF8100D222A2 /* Models */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECE2BE8A2B4EAF8100D222A2 /* Models in Frameworks */,
+				EC3A8E0E2B52F1FC00A47F05 /* ModelExtensionEmoji in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,7 @@
 			name = "cli-doshou";
 			packageProductDependencies = (
 				ECE2BE892B4EAF8100D222A2 /* Models */,
+				EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */,
 			);
 			productName = "cli-doshou";
 			productReference = ECE2BE7C2B4EA72C00D222A2 /* cli-doshou */;
@@ -307,6 +310,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ModelExtensionEmoji;
+		};
 		ECE2BE892B4EAF8100D222A2 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
