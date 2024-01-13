@@ -24,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		ECAA23902B52EB7B00CBBC38 /* ModelExtensionEmoji */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ModelExtensionEmoji; path = ../ModelExtensionEmoji; sourceTree = "<group>"; };
+		ECAA23912B52ECED00CBBC38 /* ModelExtensionEmoji */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ModelExtensionEmoji; path = ../ModelExtensionEmoji; sourceTree = "<group>"; };
 		ECE2BE7C2B4EA72C00D222A2 /* cli-doshou */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cli-doshou"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE2BE7F2B4EA72C00D222A2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -40,9 +42,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ECAA238F2B52EB7B00CBBC38 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				ECAA23902B52EB7B00CBBC38 /* ModelExtensionEmoji */,
+				ECAA23912B52ECED00CBBC38 /* ModelExtensionEmoji */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		ECE2BE732B4EA72C00D222A2 = {
 			isa = PBXGroup;
 			children = (
+				ECAA238F2B52EB7B00CBBC38 /* Packages */,
 				ECE2BE7E2B4EA72C00D222A2 /* cli-doshou */,
 				ECE2BE7D2B4EA72C00D222A2 /* Products */,
 				ECE2BE862B4EABCD00D222A2 /* Frameworks */,

@@ -10,7 +10,7 @@ import Foundation
 public struct Board {
     let nbRows: Int
     let nbColumns: Int
-    private(set) var grid: [[Cell]]
+    public private(set) var grid: [[Cell]]
     
     public init?(grid: [[Cell]]) {
         let rowSize = grid.first?.count ?? 0

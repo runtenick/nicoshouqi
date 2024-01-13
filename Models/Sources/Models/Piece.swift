@@ -8,8 +8,8 @@
 import Foundation
 
 public struct Piece: CustomStringConvertible {
-    let owner: Owner
-    let animal: Animal
+    public let owner: Owner
+    public let animal: Animal
     
     public init(owner: Owner, animal: Animal) {
         self.owner = owner

@@ -8,10 +8,10 @@
 import Foundation
 
 public struct Cell: CustomStringConvertible {
-    let cellType: CellType
-    let initialOwner: Owner
+    public let cellType: CellType
+    public let initialOwner: Owner
     // piece is optional so I might have to do "if let ..." when using this attribute
-    let piece: Piece?
+    public let piece: Piece?
     
     public init(cellType: CellType, initialOwner: Owner = .noOne, piece: Piece? = nil) {
         self.cellType = cellType

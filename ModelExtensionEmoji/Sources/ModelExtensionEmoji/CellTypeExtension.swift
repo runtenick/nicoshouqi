@@ -9,7 +9,7 @@ import Foundation
 import Models
 
 public extension CellType {
-    let symbol: String {
+    var symbol: String {
         switch self {
             case .unknown:
                 return " "

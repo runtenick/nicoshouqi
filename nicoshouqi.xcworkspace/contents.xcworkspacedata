@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MyPlayground.playground">
+   </FileRef>
+   <FileRef
       location = "group:Models">
    </FileRef>
    <FileRef
@@ -9,8 +12,5 @@
    </FileRef>
    <FileRef
       location = "group:ModelExtensionEmoji">
-   </FileRef>
-   <FileRef
-      location = "group:playground.playground">
    </FileRef>
 </Workspace>
