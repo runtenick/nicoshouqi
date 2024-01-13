@@ -21,9 +21,9 @@ public extension Board {
                     board += "\(cell.cellType.symbol)"
                 }
             }
-            print(board)
-            board = ""
-            print("")
+            // prints one line, then resets board
+            // print(board)
+            board += "\n"
         }
         return board
     }
