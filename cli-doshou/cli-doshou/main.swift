@@ -131,8 +131,36 @@ let row10 = [cell90, cell91, cell92, cell93, cell94, cell95, cell96]
 
 let grid = [row1, row2, row3, row4, row5, row6, row7, row8, row9, row10]
 
-let board = Board(grid: grid)
-if let bboard = board {
+var board = Board(grid: grid)
+if var bboard = board {
     print(bboard.classique);
+    
+    // testing countPieces
+
+    // for player 1
+    let playerOnePieces = bboard.countPieces(of: .player1)
+    print("Nb pieces for player1 : \(playerOnePieces)")
+
+    // for player 2
+    let playerTwoPieces = bboard.countPieces(of: .player2)
+    print("Nb pieces for player2: \(playerTwoPieces)")
+
+    // both
+    let both = bboard.countPieces()
+    print("both : \(both)")
+
+    // Remove lion piece
+    var result1 = bboard.removePiece(atRow: 0, andColumn: 0)
+    print(bboard.classique)
+
+
+    let crazyRatPiece = Piece(owner: .player1, animal: .rat)
+    // Insert rat piece
+    var result2 = bboard.insertPiece(piece: crazyRatPiece, atRow: 0, andColumn: 0)
+    print(bboard.classique)
+    
+    print(result1)
+    print(result2)
 }
+
 
