@@ -51,12 +51,17 @@ public struct Board {
     ///  Inserts a piece into a given cell.
     public mutating func insertPiece(piece: Piece, atRow: Int, andColumn: Int) -> BoardResult {
         // Check if out of bounds
-        if atRow < 0 || atRow >= nbRows || andColumn < 0 || andColumn >= nbColumns {
+        /*if atRow < 0 || atRow >= nbRows || andColumn < 0 || andColumn >= nbColumns {
+            return .failed(reason: .outOfBounds)
+        }*/
+        
+        guard atRow >= 0, atRow < nbRows, andColumn >= 0, andColumn < nbColumns else {
             return .failed(reason: .outOfBounds)
         }
         
         // Check if cell not empty
-        if grid[atRow][andColumn].piece != nil {
+        // if != nil or guard ==
+        guard grid[atRow][andColumn].piece == nil else {
             return .failed(reason: .cellNotEmpty)
         }
         
