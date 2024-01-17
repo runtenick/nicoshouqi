@@ -271,9 +271,39 @@ class BoardTests : XCTestCase {
         XCTAssertEqual(result, .failed(reason: .outOfBounds))
     }
     
+    
+    /// Tests the initiallizer performance
     func testInitializerPerformanceTest() {
         self.measure {
-            _ = Board(grid: [[]])
+            _ = Board(grid: board.grid)
+        }
+    }
+    
+    /// Tests board's remove pieces performance
+    func testRemovePiecesPerformance() {
+        self.measure {
+            _ = board.countPieces()
+        }
+    }
+    
+    /// Tests the performance of board's removePieces(of:) method
+    func testRemovePiecesOfPerformance() {
+        self.measure {
+            _ = board.countPieces(of: .player1)
+        }
+    }
+    
+    /// Tests the performance of board's insertPiece method
+    func testInsertPiecePerformance() {
+        self.measure {
+            _ = board.insertPiece(piece: Piece(owner: .player1, animal: .cat), atRow: 0, andColumn: 1)
+        }
+    }
+    
+    /// Tests the performance of board's removePiece method
+    func testRemovePiecePerformance() {
+        self.measure {
+            _ = board.removePiece(atRow: 0, andColumn: 0)
         }
     }
 }
