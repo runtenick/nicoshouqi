@@ -151,20 +151,31 @@ class BoardTests : XCTestCase {
     /// Tests the board initializer.
     func testBoardInitilizer(){
         XCTAssertNotNil(board)
+        
         XCTAssertEqual(board.nbColumns, 7)
         XCTAssertEqual(board.nbRows, 10)
     }
     
     /// Tests the count pieces method.
     func testCountPieces() {
-        let player1 = Owner.player1
-        let player2 = Owner.player2
-        
-        let player1PieceCount = board.countPieces(of: player1)
-        let player2PieceCount = board.countPieces(of: player2)
+        let player1PieceCount = board.countPieces(of: .player1)
+        let player2PieceCount = board.countPieces(of: .player2)
         
         XCTAssertEqual(player1PieceCount, 8, "Expected player1 count to be 8, but got \(player1PieceCount)")
-        XCTAssertEqual(player1PieceCount, 8)
+        XCTAssertEqual(player1PieceCount, 8, "Expected player2 count to be 8, but got \(player2PieceCount)")
     }
     
+    /// Tests the count pieces method, returning a tuple.
+    func testCountPiecesWithTuple() {
+        
+        /// Arrange
+        let expectedTuple = (playerOneCount:8, playerTwoCount: 8)
+        
+        /// Act
+        let returnedTuple = board.countPieces()
+
+        /// Assert
+        XCTAssertEqual(expectedTuple.playerOneCount, returnedTuple.playerOneCount)
+        XCTAssertEqual(expectedTuple.playerTwoCount, returnedTuple.playerTwoCount)
+    }
 }

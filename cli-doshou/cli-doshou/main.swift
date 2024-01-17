@@ -149,14 +149,14 @@ if var bboard = board {
     let both = bboard.countPieces()
     print("both : \(both)")
 
-    // Remove lion piece
-    var result1 = bboard.removePiece(atRow: 0, andColumn: 0)
+    // Remove test: lion piece
+    let result1 = bboard.removePiece(atRow: 0, andColumn: 0)
     print(bboard.classique)
 
 
     let crazyRatPiece = Piece(owner: .player1, animal: .rat)
-    // Insert rat piece
-    var result2 = bboard.insertPiece(piece: crazyRatPiece, atRow: 0, andColumn: 0)
+    // Insert test: rat piece
+    let result2 = bboard.insertPiece(piece: crazyRatPiece, atRow: 0, andColumn: 0)
     print(bboard.classique)
     
     print(result1)
