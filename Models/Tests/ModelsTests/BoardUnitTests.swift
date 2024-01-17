@@ -270,4 +270,10 @@ class BoardTests : XCTestCase {
         /// Assert
         XCTAssertEqual(result, .failed(reason: .outOfBounds))
     }
+    
+    func testInitializerPerformanceTest() {
+        self.measure {
+            _ = Board(grid: [[]])
+        }
+    }
 }

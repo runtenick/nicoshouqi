@@ -7,7 +7,6 @@
 import Foundation
 import Models
 
-
 public extension Animal {
     var symbol: String {
         switch self {
