@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "9AEC4AEF-45A9-487B-9859-33B164898B85",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:",
+          "identifier" : "ModelsTests",
+          "name" : "ModelsTests"
+        }
+      ]
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:..\/cli-doshou\/cli-doshou.xcodeproj",
+      "identifier" : "ECE2BE7B2B4EA72C00D222A2",
+      "name" : "cli-doshou"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ModelsTests",
+        "name" : "ModelsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

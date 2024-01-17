@@ -40,11 +40,11 @@ public struct Board {
     }
     
     /// Counts the pieces of both players.
-    public func countPieces() -> (Int, Int) {
+    public func countPieces() -> (playerOneCount: Int, playerTwoCount: Int) {
         let playerOneCount = self.countPieces(of: .player1)
         let playerTwoCount = self.countPieces(of: .player2)
         
-        return (playerOneCount, playerTwoCount)
+        return (playerOneCount: playerOneCount, playerTwoCount: playerTwoCount)
     }
     
     // [TODO] unknown check ?
