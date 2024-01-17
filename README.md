@@ -3,11 +3,9 @@
 ## Todo list
 * see if board struct's grid can use insert, etc methods..
 * [x] add playground to the gitignore
-<<<<<<< HEAD
 * tostring pour board pas de attribut classique
 * a revoir guard vs if when to use one rather than the other
 * voir datasets
-=======
 
 ## 🎲 A cli doshouqi game
 
@@ -36,4 +34,3 @@ You can run tests if you like, use :
 ```sh
 swift test
 ```
->>>>>>> a631a5a0ade8d328bb040a6c334a5fd4ed68d12f
