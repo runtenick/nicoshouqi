@@ -243,6 +243,18 @@ class BoardTests : XCTestCase {
         XCTAssertEqual(result, .failed(reason: .outOfBounds))
     }
     
+    /// Test inserting a piece using a different test method
+    func testInsertPiece(){
+        func expect(expectedResult: BoardResult, atRow: Int, andColumn: Int) {
+            let res = board.insertPiece(piece: Piece(owner: .player1, animal: .cat), atRow: atRow, andColumn: andColumn)
+            XCTAssertEqual(expectedResult, res)
+        }
+        
+        expect(expectedResult: .ok, atRow: 0, andColumn: 1)
+        expect(expectedResult: .failed(reason: .outOfBounds), atRow: -1, andColumn: 8)
+        expect(expectedResult: .failed(reason: .cellNotEmpty), atRow: 0, andColumn: 0)
+    }
+    
     /// Tests removing a piece from a occupied cell.
     func testRemovePieceNotEmptyCell() {
         
