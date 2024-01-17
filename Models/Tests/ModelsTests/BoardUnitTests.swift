@@ -149,11 +149,38 @@ class BoardTests : XCTestCase {
     }
     
     /// Tests the board initializer.
-    func testBoardInitilizer(){
+    func testBoardInitilizerValidGrid(){
         XCTAssertNotNil(board)
         
         XCTAssertEqual(board.nbColumns, 7)
         XCTAssertEqual(board.nbRows, 10)
+    }
+    
+    /// Tests the board initializer with an invalid grid.
+    func testBoardInitializerInvalidGrid() {
+        /// Arrange
+        let cell = Cell(cellType: .jungle)
+        let invalidGrid = [[cell, cell], [cell, cell, cell]]
+        
+        /// Act
+        let board = Board(grid: invalidGrid)
+        
+        /// Assert
+        XCTAssertNil(board)
+    }
+    
+    /// Tests the board initializer with an empty grid.
+    func testBoardInitializerEmptyGrid(){
+        /// Arrange
+        let emptyGrid: [[Cell]] = []
+        
+        /// Act
+        let board = Board(grid: emptyGrid)
+        
+        /// Assert
+        XCTAssertNotNil(board)
+        XCTAssertEqual(board?.nbRows, 0)
+        XCTAssertEqual(board?.nbColumns, 0)
     }
     
     /// Tests the count pieces method.
