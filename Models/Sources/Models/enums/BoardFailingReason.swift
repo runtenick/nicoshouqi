@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum BoardFailingReason {
+public enum BoardFailingReason : Equatable {
     case unknown
     case outOfBounds
     case cellNotEmpty

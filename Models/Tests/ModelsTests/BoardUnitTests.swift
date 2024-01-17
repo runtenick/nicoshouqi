@@ -178,4 +178,69 @@ class BoardTests : XCTestCase {
         XCTAssertEqual(expectedTuple.playerOneCount, returnedTuple.playerOneCount)
         XCTAssertEqual(expectedTuple.playerTwoCount, returnedTuple.playerTwoCount)
     }
+    
+    /// Tests inserting a piece on a empty cell.
+    func testInsertPieceEmptyCell() {
+        /// Arrange
+        let pieceToInsert = Piece(owner: .player1, animal: .rat)
+        
+        /// Act
+        let result = board.insertPiece(piece: pieceToInsert, atRow: 0, andColumn: 1)
+
+        /// Assert
+        XCTAssertEqual(result, .ok)
+        XCTAssertEqual(board.grid[0][1].piece, pieceToInsert)
+    }
+    
+    /// Tests inserting a piece on a occupied cell
+    func testInsertPieceNotEmptyCell() {
+        /// Arrange
+        let pieceToInsert = Piece(owner: .player1, animal: .cat)
+        
+        /// Act
+        let result = board.insertPiece(piece: pieceToInsert, atRow: 0, andColumn: 0)
+
+        /// Assert
+        XCTAssertEqual(result, .failed(reason: .cellNotEmpty))
+    }
+    
+    /// Tests inserting a piece out of bounds.
+    func testInsertPieceOutOfBounds(){
+        /// Arrange
+        let pieceToInsert = Piece(owner: .player2, animal: .elephant)
+        
+        /// Act
+        let result = board.insertPiece(piece: pieceToInsert, atRow: 11, andColumn: -1)
+        
+        /// Assert
+        XCTAssertEqual(result, .failed(reason: .outOfBounds))
+    }
+    
+    /// Tests removing a piece from a occupied cell.
+    func testRemovePieceNotEmptyCell() {
+        
+        /// Act
+        let result = board.removePiece(atRow: 0, andColumn: 0)
+
+        /// Assert
+        XCTAssertEqual(result, .ok)
+    }
+    
+    /// Tests removing a piece from an empty cell.
+    func testRemovePieceEmptyCell(){
+        /// Act
+        let result = board.removePiece(atRow: 0, andColumn: 1)
+        
+        /// Assert
+        XCTAssertEqual(result, .failed(reason: .cellEmpty))
+    }
+    
+    /// Tests removing a piece out of bounds.
+    func testRemovePieceOutOfBounds(){
+        /// Act
+        let result = board.removePiece(atRow: -1, andColumn: 8)
+        
+        /// Assert
+        XCTAssertEqual(result, .failed(reason: .outOfBounds))
+    }
 }
