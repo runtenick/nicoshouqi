@@ -1,12 +1,5 @@
 # Nicoshouqi 🐀 > 🐘
 
-## Todo list
-* see if board struct's grid can use insert, etc methods..
-* [x] add playground to the gitignore
-* tostring pour board pas de attribut classique
-* a revoir guard vs if when to use one rather than the other
-* voir datasets
-
 ## 🎲 A cli doshouqi game
 
 ## 📝 Description
@@ -34,3 +27,9 @@ You can run tests if you like, use :
 ```sh
 swift test
 ```
+
+## :memo: Todo list
+* see if board struct's grid can use insert, etc methods..
+* tostring pour board pas de attribut classique
+* a revoir guard vs if when to use one rather than the other
+* voir datasets
