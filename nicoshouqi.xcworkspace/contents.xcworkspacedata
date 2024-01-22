@@ -13,7 +13,4 @@
    <FileRef
       location = "group:ModelExtensionEmoji">
    </FileRef>
-   <FileRef
-      location = "group:Models/Tests/ModelsTests/ModelsTests.xctestplan">
-   </FileRef>
 </Workspace>
