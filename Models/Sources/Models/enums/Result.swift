@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The game result enum.
 public enum Result {
     case notFinished
     case even

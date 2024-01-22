@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The winning reason enum.
 public enum WinningReason {
     case denReached
     case noMorePieces
