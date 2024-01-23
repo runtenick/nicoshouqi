@@ -13,6 +13,7 @@ public struct VerySimpleRules : Rules {
     
     public var historic: [Move]
     
+    /// Creates a board for this ruleset.
     static public func createBoard() -> Board {
         var grid : [[Cell]] = [[]]
         
@@ -72,6 +73,7 @@ public struct VerySimpleRules : Rules {
         return true
     }
     
+    /// Gets the next player
     public func getNextPlayer() -> Owner {
         if self.historic.last?.owner == .player1 {
             return .player2
@@ -80,6 +82,7 @@ public struct VerySimpleRules : Rules {
         }
     }
     
+    ///
     public func getMoves(board: Board, owner: Owner) -> [Move] {
         let tab : [Move] = []
         return tab
@@ -91,12 +94,41 @@ public struct VerySimpleRules : Rules {
         
     }
     
-    public func isMoveValid(board: Board, fromRown: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
+    /// Checks if a move is valid from one cell to another
+    public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
+        /// Insure that the move is within the board
+        guard fromRow > 0, fromRow <= board.nbRows, fromColumn > 0, fromColumn <= board.nbColumns,
+              toRow > 0, toRow <= board.nbRows, toColumn > 0, toColumn <= board.nbColumns else {
+            return false;
+        }
+        
+        /// Checks if the move is horizontal or vertical and of lenght
+        guard abs(fromRow - toRow) + abs(fromColumn - toColumn) == 1 else {
+            return false
+        }
+        
+        /// Checks if the starting cell contains a piece
+        let startingCell = board.grid[fromRow][fromColumn]
+        guard let startingPiece = startingCell.piece else {
+            return false
+        }
+        
+        /// Checks if the destination cell is empty or contains opposing pieces with a lower / same rank
+        let destinationCell = board.grid[toRow][toColumn]
+        if let destinationPiece = destinationCell.piece {
+            
+            if destinationPiece.owner == startingPiece.owner ||
+                startingPiece.animal.rawValue < destinationPiece.animal.rawValue {
+                return false
+            }
+        }
+        
         return true
     }
     
+    /// Checks if a move is valid in a given board
     public func isMoveValid(board: Board, move: Move) -> Bool {
-        return true
+        return isMoveValid(board: board, fromRow: move.rowOrigin, fromColumn: move.columnOrigin, toRow: move.rowDestination, toColumn: move.columnDestination)
     }
     
     public func isGameOver(board: Board, lastRow: Int, lastColumn: Int) -> (Bool, Result) {

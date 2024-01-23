@@ -17,7 +17,7 @@ public protocol Rules {
     func getNextPlayer() -> Owner
     func getMoves(board: Board, owner: Owner) -> [Move]
     func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) -> [Move]
-    func isMoveValid(board: Board, fromRown: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool
+    func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool
     func isMoveValid(board: Board, move: Move) -> Bool
     func isGameOver(board: Board, lastRow: Int, lastColumn: Int) -> (Bool, Result)
     func playedMove(move: Move, initialBoard: Board, endingBoard: Board)

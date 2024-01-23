@@ -7,13 +7,14 @@
 
 import Foundation
 
-public enum Animal {
-    case rat
-    case cat
-    case dog
-    case wolf
-    case leopard
-    case tiger
-    case lion
-    case elephant
+/// The animal enum. Has an associated value representing its rank.
+public enum Animal : Int {
+    case rat = 1
+    case cat = 2
+    case dog = 3
+    case wolf = 4
+    case leopard = 5
+    case tiger = 6
+    case lion = 7
+    case elephant = 8
 }
