@@ -82,17 +82,44 @@ public struct VerySimpleRules : Rules {
         }
     }
     
-    ///
+    /// Returns the list of valid moves for a given player on a given board
     public func getMoves(board: Board, owner: Owner) -> [Move] {
-        let tab : [Move] = []
-        return tab
-    }
+            var moves: [Move] = []
+            
+            // for every cell
+            for row in 0..<board.nbRows {
+                for column in 0..<board.nbColumns {
+                    
+                    if let piece = board.grid[row][column].piece, piece.owner == owner {
+                        let pieceMoves = getMoves(board: board, owner: owner, fromRow: row, andColumn: column)
+                        moves.append(contentsOf: pieceMoves)
+                    }
+                }
+            }
+            
+            return moves
+        }
     
+    /// Returns the list of valid moves for a given player, on a given board, starting at a given cell.
     public func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) -> [Move] {
-        let tab : [Move] = []
-        return tab
-        
-    }
+            var moves: [Move] = []
+            
+            // right, left, up, down
+            let possibleDirections: [(Int, Int)] = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            
+            for direction in possibleDirections {
+                let newRow = fromRow + direction.0
+                let newColumn = andColumn + direction.1
+                
+                // if move is valid append to list
+                if isMoveValid(board: board, fromRow: fromRow, fromColumn: andColumn, toRow: newRow, toColumn: newColumn) {
+                    let move = Move(owner: owner, rowOrigin: fromRow, columnOrigin: andColumn, rowDestination: newRow, columnDestination: newColumn)
+                    moves.append(move)
+                }
+            }
+            
+            return moves
+        }
     
     /// Checks if a move is valid from one cell to another
     public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) -> Bool {
@@ -131,11 +158,29 @@ public struct VerySimpleRules : Rules {
         return isMoveValid(board: board, fromRow: move.rowOrigin, fromColumn: move.columnOrigin, toRow: move.rowDestination, toColumn: move.columnDestination)
     }
     
-    public func isGameOver(board: Board, lastRow: Int, lastColumn: Int) -> (Bool, Result) {
-        return (true, .even)
+    public func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) -> (Bool, Result) {
+        let lastCell = board.grid[lastRow][lastColumn]
+        let opponent : Owner = currentPlayer == .player1 ? .player2 : .player1
+        
+        // Check if the last moved piece reached the opponent's den
+        if lastCell.cellType == .den && lastCell.piece?.owner != currentPlayer {
+            return (true, .winner(winningReason: .denReached))
+        }
+        
+        // Check if oponent has any pieces left
+        let opPieces = board.countPieces(of: opponent)
+        if opPieces == 0 { return (true, .winner(winningReason: .noMorePieces)) }
+        
+        // Check if oponent has any moves left
+        let oponentMoves: [Move] = getMoves(board: board, owner: opponent)
+        if oponentMoves.isEmpty { return (true, .winner(winningReason: .noMovesLeft))}
+                
+        // The game is not over
+        return (false, .notFinished)
     }
     
-    public func playedMove(move: Move, initialBoard: Board, endingBoard: Board) {
-        
+    public mutating func playedMove(move: Move, initialBoard: Board, endingBoard: Board) {
+        ocurrences.append(endingBoard)
+        historic.append(move)
     }
 }
