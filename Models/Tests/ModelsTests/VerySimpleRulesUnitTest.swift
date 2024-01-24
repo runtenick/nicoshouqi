@@ -93,20 +93,20 @@ final class VerySimpleRulesUnitTest: XCTestCase {
 //            }())
 //        }
     
-    private func createSampleBoard(boardType: String) -> Board {
-        
-        switch boardType {
-            case "gameNotOver":
-            let grid: [[Cell]] = [
-                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)],
-                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
-                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
-                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
-                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)]
-                    ]
-                    return Board(grid: grid)!
-        default :
-            return VerySimpleRules.createBoard()
-        }
-    }
+//    private func createSampleBoard(boardType: String) -> Board {
+//
+//        switch boardType {
+//            case "gameNotOver":
+//            let grid: [[Cell]] = [
+//                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+//                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+//                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+//                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+//                        [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)]
+//                    ]
+//                    return Board(grid: grid)!
+//        default :
+//            return VerySimpleRules.createBoard()
+//        }
+//    }
 }

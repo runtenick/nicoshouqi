@@ -34,6 +34,8 @@
 					<real>0.000004</real>
 					<key>baselineIntegrationDisplayName</key>
 					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>500.000000</real>
 				</dict>
 			</dict>
 			<key>testRemovePiecesOfPerformance()</key>

@@ -8,7 +8,11 @@
 import Foundation
 
 /// Represents a move in the game.
-public struct Move {
+public struct Move : CustomStringConvertible {
+    public var description: String {
+        return "\(owner) played piece at row \(rowOrigin) and column \(columnOrigin) to row \(rowDestination) and column \(columnDestination)"
+    }
+    
     public let owner : Owner
     public let rowOrigin : Int
     public let columnOrigin : Int
@@ -22,4 +26,6 @@ public struct Move {
         self.rowDestination = rowDestination
         self.columnDestination = columnDestination
     }
+    
+    
 }

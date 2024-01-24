@@ -189,7 +189,6 @@ public struct VerySimpleRules : Rules {
                 throw GameError.invalidMove
             }
         }
-        
         return true
     }
     
