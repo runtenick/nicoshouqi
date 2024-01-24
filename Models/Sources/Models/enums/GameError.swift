@@ -8,6 +8,6 @@
 import Foundation
 
 /// The game error enum
-public enum GameError {
+public enum GameError: Error {
     case invalidMove
 }
