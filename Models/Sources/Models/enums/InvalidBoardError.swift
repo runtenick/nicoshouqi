@@ -14,4 +14,5 @@ public enum InvalidBoardError : Error {
     case multipleOccurencesOfSamePiece(piece: Piece)
     case pieceWithNoOwner(piece: Piece)
     case pieceNotAllowedOnThisCell(piece: Piece, cell: Cell)
+    case badNumberOfPieces
 }

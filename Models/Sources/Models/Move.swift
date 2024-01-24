@@ -15,7 +15,7 @@ public struct Move {
     public let rowDestination : Int
     public let columnDestination : Int
     
-    init(owner: Owner, rowOrigin: Int, columnOrigin: Int, rowDestination: Int, columnDestination: Int) {
+    public init(owner: Owner, rowOrigin: Int, columnOrigin: Int, rowDestination: Int, columnDestination: Int) {
         self.owner = owner
         self.rowOrigin = rowOrigin
         self.columnOrigin = columnOrigin

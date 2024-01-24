@@ -12,6 +12,11 @@ public struct VerySimpleRules : Rules {
     public var ocurrences: [Board]
     public var historic: [Move]
     
+    public init() {
+        self.historic = []
+        self.ocurrences = []
+    }
+    
     /// Creates a board for this ruleset.
     static public func createBoard() -> Board {
         var grid : [[Cell]] = []
@@ -33,6 +38,32 @@ public struct VerySimpleRules : Rules {
             
             grid.append(row)
         }
+        // add animals
+        // player 1
+        let lion1 = Piece(owner: .player1, animal: .lion)
+        let tiger1 = Piece(owner: .player1, animal: .tiger)
+        let rat1 = Piece(owner: .player1, animal: .rat)
+        let cat1 = Piece(owner: .player1, animal: .cat)
+        let elephant1 = Piece(owner: .player1, animal: .elephant)
+        
+        grid[0][1] = Cell(cellType: .jungle, initialOwner: .player1, piece: lion1)
+        grid[0][3] = Cell(cellType: .jungle, initialOwner: .player1, piece: tiger1)
+        grid[1][0] = Cell(cellType: .jungle, initialOwner: .player1, piece: rat1)
+        grid[1][2] = Cell(cellType: .jungle, initialOwner: .player1, piece: cat1)
+        grid[1][4] = Cell(cellType: .jungle, initialOwner: .player1, piece: elephant1)
+        
+        // player 2
+        let lion2 = Piece(owner: .player2, animal: .lion)
+        let tiger2 = Piece(owner: .player2, animal: .tiger)
+        let rat2 = Piece(owner: .player2, animal: .rat)
+        let cat2 = Piece(owner: .player2, animal: .cat)
+        let elephant2 = Piece(owner: .player2, animal: .elephant)
+        
+        grid[3][0] = Cell(cellType: .jungle, initialOwner: .player2, piece: lion2)
+        grid[3][2] = Cell(cellType: .jungle, initialOwner: .player2, piece: tiger2)
+        grid[3][4] = Cell(cellType: .jungle, initialOwner: .player2, piece: rat2)
+        grid[1][2] = Cell(cellType: .jungle, initialOwner: .player2, piece: cat2)
+        grid[1][4] = Cell(cellType: .jungle, initialOwner: .player2, piece: elephant2)
         
         // last row
         grid.append(denRow)
@@ -72,12 +103,7 @@ public struct VerySimpleRules : Rules {
         
         /// Guards the number of pieces for each player
         guard board.countPieces(of: .player1) <= 5, board.countPieces(of: .player2) <= 5 else {
-            return false
-        }
-        
-        /// Guards that the player doesn't have any unallowed pieces
-        guard !board.grid.contains(where: { $0.contains { $0.piece?.animal != .wolf && $0.piece?.animal != .dog && $0.piece?.animal != .leopard }}) else {
-            return false
+            throw InvalidBoardError.badNumberOfPieces
         }
         
         return true
@@ -121,6 +147,10 @@ public struct VerySimpleRules : Rules {
                 let newRow = fromRow + direction.0
                 let newColumn = andColumn + direction.1
                 
+                if newRow >= 5 || newColumn >= 5 {
+                    continue
+                }
+                
                 // if move is valid append to list
                 if try isMoveValid(board: board, fromRow: fromRow, fromColumn: andColumn, toRow: newRow, toColumn: newColumn) {
                     let move = Move(owner: owner, rowOrigin: fromRow, columnOrigin: andColumn, rowDestination: newRow, columnDestination: newColumn)
@@ -134,8 +164,8 @@ public struct VerySimpleRules : Rules {
     /// Checks if a move is valid from one cell to another
     public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) throws -> Bool {
         /// Insure that the move is within the board
-        guard fromRow > 0, fromRow <= board.nbRows, fromColumn > 0, fromColumn <= board.nbColumns,
-              toRow > 0, toRow <= board.nbRows, toColumn > 0, toColumn <= board.nbColumns else {
+        guard fromRow >= 0, fromRow <= board.nbRows, fromColumn >= 0, fromColumn <= board.nbColumns,
+              toRow >= 0, toRow <= board.nbRows, toColumn >= 0, toColumn <= board.nbColumns else {
             throw GameError.invalidMove
         }
         

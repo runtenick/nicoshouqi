@@ -8,7 +8,7 @@
 import Foundation
 
 /// The game result enum.
-public enum Result {
+public enum Result: Equatable {
     case notFinished
     case even
     case winner(winningReason: WinningReason)
