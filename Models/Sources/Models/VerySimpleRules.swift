@@ -168,7 +168,7 @@ public struct VerySimpleRules : Rules {
         return try isMoveValid(board: board, fromRow: move.rowOrigin, fromColumn: move.columnOrigin, toRow: move.rowDestination, toColumn: move.columnDestination)
     }
     
-    public func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) -> (Bool, Result) {
+    public func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) throws -> (Bool, Result) {
         let lastCell = board.grid[lastRow][lastColumn]
         let opponent : Owner = currentPlayer == .player1 ? .player2 : .player1
         
@@ -182,7 +182,7 @@ public struct VerySimpleRules : Rules {
         if opPieces == 0 { return (true, .winner(winningReason: .noMorePieces)) }
         
         // Check if oponent has any moves left
-        let oponentMoves: [Move] = getMoves(board: board, owner: opponent)
+        let oponentMoves: [Move] = try getMoves(board: board, owner: opponent)
         if oponentMoves.isEmpty { return (true, .winner(winningReason: .noMovesLeft))}
                 
         // The game is not over
