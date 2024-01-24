@@ -8,8 +8,8 @@
 import Foundation
 
 public struct Board {
-    let nbRows: Int
-    let nbColumns: Int
+    public let nbRows: Int
+    public let nbColumns: Int
     public private(set) var grid : [[Cell]]
     
     public init?(grid: [[Cell]]) {

@@ -10,12 +10,12 @@ import Foundation
 public struct VerySimpleRules : Rules {
     
     public var ocurrences: [Board]
-    
     public var historic: [Move]
     
     /// Creates a board for this ruleset.
     static public func createBoard() -> Board {
-        var grid : [[Cell]] = [[]]
+        var grid : [[Cell]] = []
+        var board : Board
         
         let denRow = [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle) ]
         
@@ -38,7 +38,7 @@ public struct VerySimpleRules : Rules {
         grid.append(denRow)
         
         // board creation
-        let board = Board(grid: grid)!
+        board = Board(grid: grid)!
         return board
     }
     

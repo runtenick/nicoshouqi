@@ -142,12 +142,6 @@ class BoardTests : XCTestCase {
         board = Board(grid: grid)
     }
     
-    // after each
-    override func tearDown() {
-        board = nil
-        super.tearDown()
-    }
-    
     /// Tests the board initializer.
     func testBoardInitilizerValidGrid(){
         XCTAssertNotNil(board)
