@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EC3A8E0E2B52F1FC00A47F05 /* ModelExtensionEmoji in Frameworks */ = {isa = PBXBuildFile; productRef = EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */; };
+		EC46784A2B66AB29006812B2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = EC4678492B66AB29006812B2 /* Models */; };
 		ECE2BE802B4EA72C00D222A2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2BE7F2B4EA72C00D222A2 /* main.swift */; };
-		ECE2BE8A2B4EAF8100D222A2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = ECE2BE892B4EAF8100D222A2 /* Models */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +25,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EC6FC15F2B66A9370034DB98 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = ../Models; sourceTree = "<group>"; };
+		ECA3D97C2B66AA480086929A /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = ../Models; sourceTree = "<group>"; };
+		ECA3D97D2B66AA550086929A /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = ../Models; sourceTree = "<group>"; };
+		ECA3D97E2B66AB090086929A /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = ../Models; sourceTree = "<group>"; };
 		ECAA23902B52EB7B00CBBC38 /* ModelExtensionEmoji */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ModelExtensionEmoji; path = ../ModelExtensionEmoji; sourceTree = "<group>"; };
 		ECAA23912B52ECED00CBBC38 /* ModelExtensionEmoji */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ModelExtensionEmoji; path = ../ModelExtensionEmoji; sourceTree = "<group>"; };
 		ECE2BE7C2B4EA72C00D222A2 /* cli-doshou */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "cli-doshou"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECE2BE8A2B4EAF8100D222A2 /* Models in Frameworks */,
+				EC46784A2B66AB29006812B2 /* Models in Frameworks */,
 				EC3A8E0E2B52F1FC00A47F05 /* ModelExtensionEmoji in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -49,6 +53,10 @@
 			children = (
 				ECAA23902B52EB7B00CBBC38 /* ModelExtensionEmoji */,
 				ECAA23912B52ECED00CBBC38 /* ModelExtensionEmoji */,
+				EC6FC15F2B66A9370034DB98 /* Models */,
+				ECA3D97C2B66AA480086929A /* Models */,
+				ECA3D97D2B66AA550086929A /* Models */,
+				ECA3D97E2B66AB090086929A /* Models */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -103,8 +111,8 @@
 			);
 			name = "cli-doshou";
 			packageProductDependencies = (
-				ECE2BE892B4EAF8100D222A2 /* Models */,
 				EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */,
+				EC4678492B66AB29006812B2 /* Models */,
 			);
 			productName = "cli-doshou";
 			productReference = ECE2BE7C2B4EA72C00D222A2 /* cli-doshou */;
@@ -314,7 +322,7 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = ModelExtensionEmoji;
 		};
-		ECE2BE892B4EAF8100D222A2 /* Models */ = {
+		EC4678492B66AB29006812B2 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
 		};
