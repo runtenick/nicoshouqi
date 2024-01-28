@@ -31,3 +31,32 @@ swift test
 ## :memo: Todo list
 * tostring pour board pas de attribut classique
 * a revoir guard vs if when to use one rather than the other
+
+### TP3
+*   
+*
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
