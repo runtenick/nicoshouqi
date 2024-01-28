@@ -29,11 +29,27 @@ swift test
 ```
 
 ## :memo: Todo list
-* Review checkboard -> throw all errors
-* Faire Board Hashable. Pourquoi ?
-* Tester les modifications ? Lancer mes tests ?
-* Faire des tests unitaire pour toutes les methodes de verySimpleRules 
-* Commenter tout le code
-
 * tostring pour board pas de attribut classique
 * a revoir guard vs if when to use one rather than the other
+
+### TP3 - TESTS checklist
+* createBoard
+* checkBoard
+* getNextPlayer
+* getMoves1
+* getMoves2
+* isMoveValid1
+* isMoveValid2
+
+__Remaining:__  
+* isGameOver
+* playedMove
+
+* Commenter le code proprement 
+
+
+
+
+
+
+

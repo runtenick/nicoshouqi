@@ -78,7 +78,28 @@ final class VerySimpleRulesUnitTest: XCTestCase {
     
     /// Tests getMoves from cell.
     func testGetMovesFromCell() {
+        // Create a sample board
+        let board = createSampleBoard(boardType: "onePieceGrid")
+            
+        let rules = VerySimpleRules()
+        let move1 = Move(owner: .player1, rowOrigin: 1, columnOrigin: 2, rowDestination: 1, columnDestination: 3)
+        let move2 = Move(owner: .player1, rowOrigin: 1, columnOrigin: 2, rowDestination: 1, columnDestination: 1)
+        let move3 = Move(owner: .player1, rowOrigin: 1, columnOrigin: 2, rowDestination: 2, columnDestination: 2)
+        let move4 = Move(owner: .player1, rowOrigin: 1, columnOrigin: 2, rowDestination: 0, columnDestination: 2)
         
+        let movesExpected = [move1, move2, move3, move4]
+        
+        do {
+            let moves = try rules.getMoves(board: board, owner: .player1, fromRow: 1, andColumn: 2)
+            
+            // Assert the expected number of moves
+            XCTAssertEqual(moves.count, 4)
+            XCTAssertEqual(moves, movesExpected)
+            
+            
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
     }
     
     /// Tests if a move is valid.
@@ -94,20 +115,6 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         /// Act & Assert
         XCTAssertTrue(try rules.isMoveValid(board: board, move: validMove))
     }
-    
-    /// Tests isGameOver function when a game isn't over.
-//    func testIsGameOver_GameNotFinished() {
-//            // Arrange
-//        let board = VerySimpleRules.createBoard()
-//            let currentPlayer: Owner = .player1
-//            
-//            // Act & Assert
-//            XCTAssertNoThrow(try {
-//                let (gameOver, result) = try rules.isGameOver(board: board, lastRow: 1, lastColumn: 1, currentPlayer: currentPlayer)
-//                XCTAssertFalse(gameOver)
-//                XCTAssertEqual(result, .notFinished)
-//            }())
-//        }
     
     private func createSampleBoard(boardType: String) -> Board {
 
