@@ -88,20 +88,39 @@ public struct VerySimpleRules : Rules {
         guard den1 == .den else { throw InvalidBoardError.badCellType(cellType: den1, row: 0, column: 2) }
         guard den2 == .den else { throw InvalidBoardError.badCellType(cellType: den2, row: 4, column: 2) }
         
-        // Check for bad cell type: water cells
+        var piecesCount: [Piece: Int] = [:]
+        
         for row in 0..<board.grid.count {
             for column in 0..<board.grid[row].count {
+                
                 let cell = board.grid[row][column]
+                
+                // Check for bad cell type: water and trap cells
                 if cell.cellType == .water {
                     throw InvalidBoardError.badCellType(cellType: .water, row: row, column: column)
                 }
                 if cell.cellType == .trap {
                     throw InvalidBoardError.badCellType(cellType: .trap, row: row, column: column)
                 }
+                
+                if let piece = cell.piece {
+                    piecesCount[piece, default: 0] += 1
+                    
+                    // Check for multiple ocurrences of the same piece
+                    guard piecesCount[piece]! <= 1 else {
+                        throw InvalidBoardError.multipleOccurencesOfSamePiece(piece: piece)
+                    }
+                    
+                    // Check for pieces with no owner
+                    guard piece.owner != .noOne else {
+                        throw InvalidBoardError.pieceWithNoOwner(piece: piece)
+                    }
+                }
             }
         }
         
         // Check for multiple ocurrences of the same piece
+        
         // Check for pieces with no owner
         
         // Check for a bad number of pieces

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Piece: CustomStringConvertible, Equatable {
+public struct Piece: CustomStringConvertible, Equatable, Hashable {
     public let owner: Owner
     public let animal: Animal
     
