@@ -9,12 +9,12 @@ import Foundation
 
 public struct VerySimpleRules : Rules {
     
-    public var ocurrences: [Board]
+    public var ocurrences: [Board:Int]
     public var historic: [Move]
     
     public init() {
         self.historic = []
-        self.ocurrences = []
+        self.ocurrences = [:]
     }
     
     /// Creates a board for this ruleset.
@@ -118,11 +118,6 @@ public struct VerySimpleRules : Rules {
                 }
             }
         }
-        
-        // Check for multiple ocurrences of the same piece
-        
-        // Check for pieces with no owner
-        
         // Check for a bad number of pieces
         guard board.countPieces(of: .player1) <= 5, board.countPieces(of: .player2) <= 5 else {
             throw InvalidBoardError.badNumberOfPieces
@@ -241,7 +236,8 @@ public struct VerySimpleRules : Rules {
     }
     
     public mutating func playedMove(move: Move, initialBoard: Board, endingBoard: Board) {
-        ocurrences.append(endingBoard)
+        // if key exists +1 else new key, value: 0
+        ocurrences[endingBoard, default: 0] += 1
         historic.append(move)
     }
 }

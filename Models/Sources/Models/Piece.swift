@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct Piece: CustomStringConvertible, Equatable, Hashable {
+// Only stored properties so automatic implementation is used
+public struct Piece: CustomStringConvertible, Hashable {
     public let owner: Owner
     public let animal: Animal
     

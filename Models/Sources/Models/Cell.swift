@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Cell: CustomStringConvertible {
+public struct Cell: CustomStringConvertible, Hashable {
     public let cellType: CellType
     public let initialOwner: Owner
     // piece is optional so I might have to do "if let ..." when using this attribute

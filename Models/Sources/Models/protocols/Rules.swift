@@ -9,7 +9,8 @@ import Foundation
 
 /// The game rules protocol.
 public protocol Rules {
-    var ocurrences : [Board] { get }
+    // Board needs hashable so that Board instances can be used as a key in a dico
+    var ocurrences : [Board:Int] { get }
     var historic : [Move] { get }
     
     static func createBoard() -> Board

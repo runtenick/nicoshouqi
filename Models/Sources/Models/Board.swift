@@ -7,7 +7,21 @@
 
 import Foundation
 
-public struct Board {
+public struct Board : Hashable {
+    
+    // == so that we know when 2 boards are the same => same hash when used as key
+    public static func == (lboard: Board, rboard: Board) -> Bool {
+        return lboard.nbRows == rboard.nbRows &&
+        lboard.nbColumns == rboard.nbColumns &&
+        lboard.grid == rboard.grid
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(nbRows)
+        hasher.combine(nbColumns)
+        hasher.combine(grid)
+    }
+    
     public let nbRows: Int
     public let nbColumns: Int
     public private(set) var grid : [[Cell]]
