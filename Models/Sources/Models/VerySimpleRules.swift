@@ -76,19 +76,19 @@ public struct VerySimpleRules : Rules {
     /// Checks if the board is valid for this ruleset.
     public static func checkBoard(board: Board) throws -> Bool {
         
-        /// Guards the number of rows and columns.
+        // Check for bad dimensions
         guard board.nbRows == 5, board.nbColumns == 5 else {
             throw InvalidBoardError.badDimensions(nbRows: board.nbRows, nbColumns: board.nbColumns)
         }
         
-        /// Guards the presence of dens in the correct position
+        // Check for bad cell type: den cells
         let den1 = board.grid[0][2].cellType
         let den2 = board.grid[4][2].cellType
 
         guard den1 == .den else { throw InvalidBoardError.badCellType(cellType: den1, row: 0, column: 2) }
         guard den2 == .den else { throw InvalidBoardError.badCellType(cellType: den2, row: 4, column: 2) }
         
-        /// Guards that there's no water or traps on the board
+        // Check for bad cell type: water cells
         for row in 0..<board.grid.count {
             for column in 0..<board.grid[row].count {
                 let cell = board.grid[row][column]
@@ -101,7 +101,10 @@ public struct VerySimpleRules : Rules {
             }
         }
         
-        /// Guards the number of pieces for each player
+        // Check for multiple ocurrences of the same piece
+        // Check for pieces with no owner
+        
+        // Check for a bad number of pieces
         guard board.countPieces(of: .player1) <= 5, board.countPieces(of: .player2) <= 5 else {
             throw InvalidBoardError.badNumberOfPieces
         }
