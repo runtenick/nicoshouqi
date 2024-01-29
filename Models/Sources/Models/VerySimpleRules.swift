@@ -17,7 +17,9 @@ public struct VerySimpleRules : Rules {
         self.ocurrences = [:]
     }
     
-    /// Creates a board for this ruleset.
+    /// Creates a new game board.
+    ///
+    /// - Returns: A new instance of the game board.
     static public func createBoard() -> Board {
         var grid : [[Cell]] = []
         var board : Board
@@ -73,7 +75,10 @@ public struct VerySimpleRules : Rules {
         return board
     }
     
-    /// Checks if the board is valid for this ruleset.
+    /// Checks if the given board is valid according to the game rules.
+    ///
+    /// - Parameter board: The board to be checked.
+    /// - Returns: A boolean value indicating whether the board is valid or not.
     public static func checkBoard(board: Board) throws -> Bool {
         
         // Check for bad dimensions
@@ -108,7 +113,7 @@ public struct VerySimpleRules : Rules {
                     
                     // Check for multiple ocurrences of the same piece
                     guard piecesCount[piece]! <= 1 else {
-                        throw InvalidBoardError.multipleOccurencesOfSamePiece(piece: piece)
+                        throw InvalidBoardError.multipleOccurrencesOfSamePiece(piece: piece)
                     }
                     
                     // Check for pieces with no owner
@@ -126,7 +131,9 @@ public struct VerySimpleRules : Rules {
         return true
     }
     
-    /// Gets the next player
+    /// Gets the next player to make a move.
+    ///
+    /// - Returns: The owner of the next move.
     public func getNextPlayer() -> Owner {
         if self.historic.last?.owner == .player1 {
             return .player2
@@ -135,7 +142,12 @@ public struct VerySimpleRules : Rules {
         }
     }
     
-    /// Returns the list of valid moves for a given player on a given board
+    /// Gets all possible moves for the specified owner on the given board.
+    ///
+    /// - Parameters:
+    ///   - board: The game board.
+    ///   - owner: The owner of the pieces.
+    /// - Returns: An array of possible moves.
     public func getMoves(board: Board, owner: Owner) throws -> [Move] {
             var moves: [Move] = []
             
@@ -153,7 +165,14 @@ public struct VerySimpleRules : Rules {
             return moves
         }
     
-    /// Returns the list of valid moves for a given player, on a given board, starting at a given cell.
+    /// Gets all possible moves for the specified owner from the specified cell on the given board.
+    ///
+    /// - Parameters:
+    ///   - board: The game board.
+    ///   - owner: The owner of the pieces.
+    ///   - fromRow: The row index of the cell.
+    ///   - andColumn: The column index of the cell.
+    /// - Returns: An array of possible moves.
     public func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) throws -> [Move] {
             var moves: [Move] = []
             
@@ -178,7 +197,15 @@ public struct VerySimpleRules : Rules {
             return moves
         }
     
-    /// Checks if a move is valid from one cell to another
+    /// Checks if a move from one cell to another is valid on the given board.
+    ///
+    /// - Parameters:
+    ///   - board: The game board.
+    ///   - fromRow: The row index of the source cell.
+    ///   - fromColumn: The column index of the source cell.
+    ///   - toRow: The row index of the destination cell.
+    ///   - toColumn: The column index of the destination cell.
+    /// - Returns: A boolean value indicating whether the move is valid or not.
     public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) throws -> Bool {
         /// Insure that the move is within the board
         guard fromRow >= 0, fromRow <= board.nbRows, fromColumn >= 0, fromColumn <= board.nbColumns,
@@ -209,11 +236,22 @@ public struct VerySimpleRules : Rules {
         return true
     }
     
-    /// Checks if a move is valid in a given board
+    /// Checks if a move is valid on the given board.
+    ///
+    /// - Parameters:
+    ///   - board: The game board.
+    ///   - move: The move to be checked.
+    /// - Returns: A boolean value indicating whether the move is valid or not.
     public func isMoveValid(board: Board, move: Move) throws -> Bool {
         return try isMoveValid(board: board, fromRow: move.rowOrigin, fromColumn: move.columnOrigin, toRow: move.rowDestination, toColumn: move.columnDestination)
     }
     
+    /// Checks if a move is valid on the given board.
+    ///
+    /// - Parameters:
+    ///   - board: The game board.
+    ///   - move: The move to be checked.
+    /// - Returns: A boolean value indicating whether the move is valid or not.
     public func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) throws -> (Bool, Result) {
         let lastCell = board.grid[lastRow][lastColumn]
         let opponent : Owner = currentPlayer == .player1 ? .player2 : .player1

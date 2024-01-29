@@ -7,11 +7,22 @@
 
 import Foundation
 
+
+/// The possible types of a cell on the game board.
 public enum CellType {
-    case unknown // default value and for debugging
+    /// The type is unknown. Used as a default value and for debugging purposes.
+    case unknown
+    
+    /// The cell represents a jungle.
     case jungle
+    
+    /// The cell represents water.
     case water
+    
+    /// The cell represents a trap.
     case trap
+    
+    /// The cell represents a den.
     case den
 }
 

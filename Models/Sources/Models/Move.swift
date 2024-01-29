@@ -19,6 +19,14 @@ public struct Move : CustomStringConvertible, Equatable {
     public let rowDestination : Int
     public let columnDestination : Int
     
+    /// Initializes a new instance of the `Move` struct.
+    ///
+    /// - Parameters:
+    ///   - owner: The owner of the move.
+    ///   - rowOrigin: The row index of the source cell.
+    ///   - columnOrigin: The column index of the source cell.
+    ///   - rowDestination: The row index of the destination cell.
+    ///   - columnDestination: The column index of the destination cell.
     public init(owner: Owner, rowOrigin: Int, columnOrigin: Int, rowDestination: Int, columnDestination: Int) {
         self.owner = owner
         self.rowOrigin = rowOrigin
