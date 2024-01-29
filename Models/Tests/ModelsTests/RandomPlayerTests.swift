@@ -54,15 +54,17 @@ final class RandomPlayerTests: XCTestCase {
         XCTAssertTrue(possibleMoves.contains(randomMove), "The chosen move should be one of the possible moves")
     }
     
-    func testChooseMoveWithError() {
+    /// Tests choose move when returns an empty array
+    func testChooseMoveEmpty() {
         // Arrange
         let rules = VerySimpleRules()
-        let board = VerySimpleRules.createBoard()
+        let emptyGrid: [[Cell]] = [[]]
+        let board = Board(grid: emptyGrid)!
                 
         // Act
         let randomMove = player.chooseMove(in: board, with: rules)
         
         // Assert
-        XCTAssertNil(randomMove, "The chosen move should be nil when an error is thrown")
+        XCTAssertNil(randomMove)
     }
 }

@@ -24,15 +24,15 @@ public class RandomPlayer: Player {
     ///   - rules: The game rules.
     /// - Returns: A randomly chosen move.
     public override func chooseMove(in board: Board, with rules: Rules) -> Move? {
-        do {
-               // Get all possible moves
-               let possibleMoves = try rules.getMoves(board: board, owner: self.id)
-               
-               // Return a random move
-               return possibleMoves.randomElement()
-           } catch {
-               print("Error occurred while getting moves: \(error)")
-               return nil
-           }
+        // Get all possible moves
+        let possibleMoves = rules.getMoves(board: board, owner: self.id)
+       
+        // If there are no valid moves, possibleMoves might be empty
+        if possibleMoves.isEmpty {
+            return nil
+        } else {
+            // Return a random move
+            return possibleMoves.randomElement()
+        }
     }
 }

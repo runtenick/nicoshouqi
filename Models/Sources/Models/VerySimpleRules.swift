@@ -148,19 +148,19 @@ public struct VerySimpleRules : Rules {
     ///   - board: The game board.
     ///   - owner: The owner of the pieces.
     /// - Returns: An array of possible moves.
-    public func getMoves(board: Board, owner: Owner) throws -> [Move] {
+    public func getMoves(board: Board, owner: Owner) -> [Move] {
             var moves: [Move] = []
             
             // for every cell
             for row in 0..<board.nbRows {
                 for column in 0..<board.nbColumns {
-                    
                     if let piece = board.grid[row][column].piece, piece.owner == owner {
-                        let pieceMoves = try getMoves(board: board, owner: owner, fromRow: row, andColumn: column)
+                        let pieceMoves = getMoves(board: board, owner: owner, fromRow: row, andColumn: column)
                         moves.append(contentsOf: pieceMoves)
                     }
                 }
             }
+            
             
             return moves
         }
@@ -173,7 +173,7 @@ public struct VerySimpleRules : Rules {
     ///   - fromRow: The row index of the cell.
     ///   - andColumn: The column index of the cell.
     /// - Returns: An array of possible moves.
-    public func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) throws -> [Move] {
+    public func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) -> [Move] {
             var moves: [Move] = []
             
             // right, left, up, down
@@ -187,10 +187,13 @@ public struct VerySimpleRules : Rules {
                     continue
                 }
                 
-                // if move is valid append to list
-                if try isMoveValid(board: board, fromRow: fromRow, fromColumn: andColumn, toRow: newRow, toColumn: newColumn) {
-                    let move = Move(owner: owner, rowOrigin: fromRow, columnOrigin: andColumn, rowDestination: newRow, columnDestination: newColumn)
-                    moves.append(move)
+                 do {
+                    if try isMoveValid(board: board, fromRow: fromRow, fromColumn: andColumn, toRow: newRow, toColumn: newColumn) {
+                        let move = Move(owner: owner, rowOrigin: fromRow, columnOrigin: andColumn, rowDestination: newRow, columnDestination: newColumn)
+                        moves.append(move)
+                    }
+                } catch {
+                    // Ignore the error and continue with the loop
                 }
             }
             
@@ -252,7 +255,7 @@ public struct VerySimpleRules : Rules {
     ///   - board: The game board.
     ///   - move: The move to be checked.
     /// - Returns: A boolean value indicating whether the move is valid or not.
-    public func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) throws -> (Bool, Result) {
+    public func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) -> (Bool, Result) {
         let lastCell = board.grid[lastRow][lastColumn]
         let opponent : Owner = currentPlayer == .player1 ? .player2 : .player1
         
@@ -266,7 +269,7 @@ public struct VerySimpleRules : Rules {
         if opPieces == 0 { return (true, .winner(winningReason: .noMorePieces)) }
         
         // Check if oponent has any moves left
-        let oponentMoves: [Move] = try getMoves(board: board, owner: opponent)
+        let oponentMoves: [Move] = getMoves(board: board, owner: opponent)
         if oponentMoves.isEmpty { return (true, .winner(winningReason: .noMovesLeft))}
                 
         // The game is not over

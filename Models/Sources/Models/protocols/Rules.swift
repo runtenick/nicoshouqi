@@ -38,7 +38,7 @@ public protocol Rules {
     ///   - board: The game board.
     ///   - owner: The owner of the pieces.
     /// - Returns: An array of possible moves.
-    func getMoves(board: Board, owner: Owner) throws -> [Move]
+    func getMoves(board: Board, owner: Owner) -> [Move]
     
     /// Gets all possible moves for the specified owner from the specified cell on the given board.
     ///
@@ -48,7 +48,7 @@ public protocol Rules {
     ///   - fromRow: The row index of the cell.
     ///   - andColumn: The column index of the cell.
     /// - Returns: An array of possible moves.
-    func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) throws -> [Move]
+    func getMoves(board: Board, owner: Owner, fromRow: Int, andColumn: Int) -> [Move]
     
     /// Checks if a move from one cell to another is valid on the given board.
     ///
@@ -77,7 +77,7 @@ public protocol Rules {
     ///   - lastColumn: The column index of the last move.
     ///   - currentPlayer: The owner of the last move.
     /// - Returns: A tuple containing a boolean value indicating whether the game is over or not, and the result of the game.
-    func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) throws -> (Bool, Result)
+    func isGameOver(board: Board, lastRow: Int, lastColumn: Int, currentPlayer: Owner) -> (Bool, Result)
     
     /// Updates the game state after a move has been played.
     ///
