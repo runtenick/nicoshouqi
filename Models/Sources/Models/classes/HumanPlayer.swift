@@ -9,14 +9,14 @@ import Foundation
 
 /// A human player in the game.
 public class HumanPlayer: Player {
-    public let inputMethod: () -> HumanPlayer
+    public let inputMethod: () -> Move
     
     /// Initializes a new instance of the `HumanPlayer` class.
     /// - Parameters:
     ///   - id: The owner of the player.
     ///   - name: The name of the player.
     ///   - inputMethod: The input method for the player.
-    public init(withId id: Owner, andName name: String, andInputMethod inputMethod: @escaping () -> HumanPlayer) {
+    public init(withId id: Owner, andName name: String, andInputMethod inputMethod: @escaping () -> Move) {
         self.inputMethod = inputMethod
         super.init(withId: id, andName: name)
     }
