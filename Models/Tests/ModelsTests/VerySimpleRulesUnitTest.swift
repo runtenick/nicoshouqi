@@ -68,7 +68,7 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         let movesExpected = [move1, move2, move3, move4]
         
         // Act
-        let movesResult = try rules.getMoves(board: board, owner: .player1)
+        let movesResult = rules.getMoves(board: board, owner: .player1)
         
         // Assert
         XCTAssertEqual(movesResult.count, 4)
@@ -89,17 +89,12 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         
         let movesExpected = [move1, move2, move3, move4]
         
-        do {
-            let moves = try rules.getMoves(board: board, owner: .player1, fromRow: 1, andColumn: 2)
-            
-            // Assert the expected number of moves
-            XCTAssertEqual(moves.count, 4)
-            XCTAssertEqual(moves, movesExpected)
-            
-            
-        } catch {
-            XCTFail("Unexpected error: \(error)")
-        }
+
+        let moves = rules.getMoves(board: board, owner: .player1, fromRow: 1, andColumn: 2)
+        
+        // Assert the expected number of moves
+        XCTAssertEqual(moves.count, 4)
+        XCTAssertEqual(moves, movesExpected)
     }
     
     /// Tests if a move is valid.
