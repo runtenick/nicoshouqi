@@ -14,7 +14,7 @@ public class RandomPlayer: Player {
     /// - Parameters:
     ///   - id: The owner of the player.
     ///   - name: The name of the player.
-    public override init(withId id: Owner, andName name: String) {
+    public override init?(withId id: Owner, andName name: String) {
         super.init(withId: id, andName: name)
     }
     

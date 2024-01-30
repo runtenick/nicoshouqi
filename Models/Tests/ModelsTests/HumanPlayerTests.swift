@@ -24,10 +24,10 @@ final class HumanPlayerTests: XCTestCase {
         let expectedName = "Human3000"
         let expectedMove = Move(owner: .player2, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 1)
         
-        let human = HumanPlayer(withId: .player2, andName: "Human3000", andInputMethod: {expectedMove})
-        
-        XCTAssertEqual(human.id, expectedId)
-        XCTAssertEqual(human.name, expectedName)
+        if let human = HumanPlayer(withId: .player2, andName: "Human3000", andInputMethod: {expectedMove}) {
+            XCTAssertEqual(human.id, expectedId)
+            XCTAssertEqual(human.name, expectedName)
+        }
     }
 
 }

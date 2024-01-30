@@ -16,8 +16,11 @@ public class Player {
     /// - Parameters:
     ///   - id: The owner of the player.
     ///   - name: The name of the player.
-    public init(withId id: Owner, andName name: String) {
+    public init?(withId id: Owner, andName name: String) {
         self.id = id
+        guard id != .noOne else {
+            return nil
+        }
         self.name = name
     }
     

@@ -21,10 +21,11 @@ final class RandomPlayerTests: XCTestCase {
         let expectedId = Owner.player2
         let expectedName = "Bot3000"
         
-        let player2 = RandomPlayer(withId: .player2, andName: "Bot3000")
+        if let player2 = RandomPlayer(withId: .player2, andName: "Bot3000") {
+            XCTAssertEqual(player2.id, expectedId)
+            XCTAssertEqual(player2.name, expectedName)
+        }
         
-        XCTAssertEqual(player2.id, expectedId)
-        XCTAssertEqual(player2.name, expectedName)
     }
     
     /// Tests the chooseMove

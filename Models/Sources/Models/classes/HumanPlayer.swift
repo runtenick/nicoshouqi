@@ -16,7 +16,7 @@ public class HumanPlayer: Player {
     ///   - id: The owner of the player.
     ///   - name: The name of the player.
     ///   - inputMethod: The input method for the player.
-    public init(withId id: Owner, andName name: String, andInputMethod inputMethod: @escaping () -> Move) {
+    public init?(withId id: Owner, andName name: String, andInputMethod inputMethod: @escaping () -> Move) {
         self.inputMethod = inputMethod
         super.init(withId: id, andName: name)
     }
@@ -30,7 +30,7 @@ public class HumanPlayer: Player {
         let move = self.inputMethod()
         
         do {
-            let isChosenMoveValid = try rules.isMoveValid(board: board, move: move)
+            let _ = try rules.isMoveValid(board: board, move: move)
             return move
             
         } catch {
