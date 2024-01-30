@@ -33,24 +33,27 @@ func getUserInput() -> Move {
     return Move(owner: .player1, rowOrigin: fromRow, columnOrigin: fromColumn, rowDestination: toRow, columnDestination: toColumn)
 }
 
-let player1 = HumanPlayer(withId: .player1, andName: "player one", andInputMethod: getUserInput)
-var move1 = player1.inputMethod()
-// check if move was properly created
-print(move1)
-
-// try choose move
-if let move1 = player1.chooseMove(in: board, with: rules) {
+if let player1 = HumanPlayer(withId: .player1, andName: "player one", andInputMethod: getUserInput) {
+    let move1 = player1.inputMethod()
+    // check if move was properly created
     print(move1)
+    
+    // try choose move
+    if let move1 = player1.chooseMove(in: board, with: rules) {
+        print(move1)
+    }
 }
 
 // See how bot performs
-let bot = RandomPlayer(withId: .player2, andName: "boto")
-if let move2 = bot.chooseMove(in: board, with: rules) {
-    // check if move was properly created
-    print(move2)
-} else {
-    print("bot had no valid moves 😭")
+if let bot = RandomPlayer(withId: .player2, andName: "boto") {
+    if let move2 = bot.chooseMove(in: board, with: rules) {
+        // check if move was properly created
+        print(move2)
+    } else {
+        print("bot had no valid moves 😭")
+    }
 }
+
 
 
 

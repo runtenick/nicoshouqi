@@ -29,5 +29,51 @@ final class HumanPlayerTests: XCTestCase {
             XCTAssertEqual(human.name, expectedName)
         }
     }
+    
+    /// Tests the choose move method.
+    func testChooseMove_validMove() {
+        // Arrange
+        let grid = generateBoard()
+        let board = Board(grid: grid)!
+        let rules = VerySimpleRules()
+        let validMove = Move(owner: .player1, rowOrigin: 1, columnOrigin: 2, rowDestination: 1, columnDestination: 3)
+        
+        let humanPlayer = HumanPlayer(withId: .player1, andName: "human", andInputMethod: { validMove })!
+        
+        // Act
+        let result = humanPlayer.chooseMove(in: board, with: rules)
+        
+        // Assert
+        XCTAssertEqual(result, validMove)
+
+    }
+    
+    /// Tests the choose move method for an invalid move.
+    func testChooseMove_invalidMove() {
+        // Arrange
+        let grid = generateBoard()
+        let board = Board(grid: grid)!
+        let rules = VerySimpleRules()
+        let invalidMove = Move(owner: .player1, rowOrigin: 1, columnOrigin: 0, rowDestination: 1, columnDestination: 0)
+        
+        let humanPlayer = HumanPlayer(withId: .player1, andName: "human", andInputMethod: { invalidMove })!
+
+        // Act
+        let result = humanPlayer.chooseMove(in: board, with: rules)
+        
+        // Assert
+        XCTAssertNil(result)
+    }
+    
+    private func generateBoard() -> [[Cell]] {
+        let grid: [[Cell]] = [
+            [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+            [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle, piece: Piece(owner: .player1, animal: .rat)), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+            [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+            [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+            [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)]
+        ]
+        return grid
+    }
 
 }
