@@ -47,7 +47,22 @@ __Remaining:__
 
 * Commenter le code proprement 
 
+---
+Suggestions to listen too, while writting some tutorials or courses... 
 
+<table>
+    <tr>
+        <td>
+            <img src="./images/xande.webp" width="120"/>
+        </td>
+        <td>
+            <div>
+                <p><b>Xande Canta Caetano</b></p>
+                <p><i>Xande de Pilares</i> (2023)</p>
+            </div>
+        </td>
+    </tr>
+</table>
 
 
 
