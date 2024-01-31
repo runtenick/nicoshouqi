@@ -15,7 +15,7 @@ final class HumanPlayerTests: XCTestCase {
     override func setUp() {
         let mockMove = Move(owner: .player1, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 1)
         
-        player = HumanPlayer(withId: .player1, andName: "Human", andInputMethod: {mockMove})
+        player = HumanPlayer(withId: .player1, andName: "Human", andInputMethod: { _ in mockMove })
     }
     
     /// Tests the initializer
@@ -24,7 +24,7 @@ final class HumanPlayerTests: XCTestCase {
         let expectedName = "Human3000"
         let expectedMove = Move(owner: .player2, rowOrigin: 0, columnOrigin: 0, rowDestination: 0, columnDestination: 1)
         
-        if let human = HumanPlayer(withId: .player2, andName: "Human3000", andInputMethod: {expectedMove}) {
+        if let human = HumanPlayer(withId: .player2, andName: "Human3000", andInputMethod: { _ in expectedMove }) {
             XCTAssertEqual(human.id, expectedId)
             XCTAssertEqual(human.name, expectedName)
         }
@@ -38,7 +38,7 @@ final class HumanPlayerTests: XCTestCase {
         let rules = VerySimpleRules()
         let validMove = Move(owner: .player1, rowOrigin: 1, columnOrigin: 2, rowDestination: 1, columnDestination: 3)
         
-        let humanPlayer = HumanPlayer(withId: .player1, andName: "human", andInputMethod: { validMove })!
+        let humanPlayer = HumanPlayer(withId: .player1, andName: "human", andInputMethod: { _ in validMove })!
         
         // Act
         let result = humanPlayer.chooseMove(in: board, with: rules)
@@ -56,7 +56,7 @@ final class HumanPlayerTests: XCTestCase {
         let rules = VerySimpleRules()
         let invalidMove = Move(owner: .player1, rowOrigin: 1, columnOrigin: 0, rowDestination: 1, columnDestination: 0)
         
-        let humanPlayer = HumanPlayer(withId: .player1, andName: "human", andInputMethod: { invalidMove })!
+        let humanPlayer = HumanPlayer(withId: .player1, andName: "human", andInputMethod: { _ in invalidMove })!
 
         // Act
         let result = humanPlayer.chooseMove(in: board, with: rules)

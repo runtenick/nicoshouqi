@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-import Models
+@testable import Models
 
 final class VerySimpleRulesUnitTest: XCTestCase {
     
@@ -127,8 +127,24 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         XCTAssertEqual(result.1, expectedResult.1)
     }
     
+    /// Tests playedMove
+    func testPlayedMove() {
+        // Arrange
+        var rules = VerySimpleRules()
+        
+        let initialBoard = createSampleBoard(boardType: "onePieceGrid")
+        let endingBoard = createSampleBoard(boardType: "pieceOnDen")
+        let fakeMove = Move(owner: .noOne, rowOrigin: 0, columnOrigin: 0, rowDestination: 1, columnDestination: 0)
+        
+        // Act
+        rules.playedMove(move: fakeMove, initialBoard: initialBoard, endingBoard: endingBoard)
+        
+        // Assert
+        XCTAssertTrue(rules.historic.contains(where: { $0 == fakeMove }))
+        XCTAssertTrue(rules.ocurrences.contains(where: {$0.key == endingBoard && $0.value == 1 }))
+    }
+    
     private func createSampleBoard(boardType: String) -> Board {
-
         switch boardType {
             case "emptyValidGrid":
                 let grid: [[Cell]] = [

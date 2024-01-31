@@ -9,14 +9,14 @@ import Foundation
 
 /// A human player in the game.
 public class HumanPlayer: Player {
-    public let inputMethod: () -> Move
+    public let inputMethod: (HumanPlayer) -> Move
     
     /// Initializes a new instance of the `HumanPlayer` class.
     /// - Parameters:
     ///   - id: The owner of the player.
     ///   - name: The name of the player.
     ///   - inputMethod: The input method for the player.
-    public init?(withId id: Owner, andName name: String, andInputMethod inputMethod: @escaping () -> Move) {
+    public init?(withId id: Owner, andName name: String, andInputMethod inputMethod: @escaping (HumanPlayer) -> Move) {
         self.inputMethod = inputMethod
         super.init(withId: id, andName: name)
     }
@@ -27,7 +27,7 @@ public class HumanPlayer: Player {
     ///   - rules: The game rules.
     /// - Returns: The chosen move, or `nil` if the move is not valid.
     public override func chooseMove(in board: Board, with rules: Rules) -> Move? {
-        let move = self.inputMethod()
+        let move = self.inputMethod(self)
         
         do {
             let _ = try rules.isMoveValid(board: board, move: move)

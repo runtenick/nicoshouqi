@@ -14,7 +14,7 @@ var board = VerySimpleRules.createBoard()
 
 print(board.classique)
 
-func getUserInput() -> Move {
+func getUserInput(humanPlayer: HumanPlayer) -> Move {
     // Prompt the user for input and read the values
     print("Enter your move:")
     print("From row:")
@@ -34,7 +34,7 @@ func getUserInput() -> Move {
 }
 
 if let player1 = HumanPlayer(withId: .player1, andName: "player one", andInputMethod: getUserInput) {
-    let move1 = player1.inputMethod()
+    let move1 = player1.inputMethod(player1)
     // check if move was properly created
     print(move1)
     
