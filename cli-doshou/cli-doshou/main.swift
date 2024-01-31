@@ -54,7 +54,16 @@ if let bot = RandomPlayer(withId: .player2, andName: "boto") {
     }
 }
 
+var lastRow: Int = 0
+var lastColumn: Int = 0
+var currentPlayer: Owner = .noOne
 
+// - GAME LOOP -
+while(!rules.isGameOver(board: board, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer).0) {
+    
+}
+
+// -- ------ --
 
 
 

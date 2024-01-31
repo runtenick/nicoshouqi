@@ -45,8 +45,13 @@ __Remaining:__
 * isGameOver
 * playedMove
 
+* set pour verifier inserted
+* verif pieces not allowed: loup chien
+* toggle method pour getNextPlayer ?
 * Commenter le code proprement 
-
+* Elephant corriger
+* just return move on human player : no valid check
+* boucle de jeux
 ---
 Suggestions to listen too, while writting some tutorials or courses... 
 

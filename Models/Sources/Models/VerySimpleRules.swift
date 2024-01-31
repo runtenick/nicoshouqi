@@ -12,6 +12,11 @@ public struct VerySimpleRules : Rules {
     public var ocurrences: [Board:Int]
     public var historic: [Move]
     
+    // constants
+    private static let NB_ROWS = 5
+    private static let NB_COLUMNS = 5
+    private static let MAX_NB_PIECES = 5
+    
     public init() {
         self.historic = []
         self.ocurrences = [:]
@@ -82,7 +87,7 @@ public struct VerySimpleRules : Rules {
     public static func checkBoard(board: Board) throws -> Bool {
         
         // Check for bad dimensions
-        guard board.nbRows == 5, board.nbColumns == 5 else {
+        guard board.nbRows == NB_ROWS, board.nbColumns == NB_COLUMNS else {
             throw InvalidBoardError.badDimensions(nbRows: board.nbRows, nbColumns: board.nbColumns)
         }
         
@@ -124,7 +129,7 @@ public struct VerySimpleRules : Rules {
             }
         }
         // Check for a bad number of pieces
-        guard board.countPieces(of: .player1) <= 5, board.countPieces(of: .player2) <= 5 else {
+        guard board.countPieces(of: .player1) <= MAX_NB_PIECES, board.countPieces(of: .player2) <= MAX_NB_PIECES else {
             throw InvalidBoardError.badNumberOfPieces
         }
         
@@ -161,7 +166,6 @@ public struct VerySimpleRules : Rules {
                 }
             }
             
-            
             return moves
         }
     
@@ -183,7 +187,7 @@ public struct VerySimpleRules : Rules {
                 let newRow = fromRow + direction.0
                 let newColumn = andColumn + direction.1
                 
-                if newRow >= 5 || newColumn >= 5 {
+                if newRow >= VerySimpleRules.NB_ROWS || newColumn >= VerySimpleRules.NB_COLUMNS {
                     continue
                 }
                 
