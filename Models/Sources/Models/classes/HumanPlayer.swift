@@ -28,16 +28,6 @@ public class HumanPlayer: Player {
     /// - Returns: The chosen move, or `nil` if the move is not valid.
     public override func chooseMove(in board: Board, with rules: Rules) -> Move? {
         let move = self.inputMethod(self)
-        
-        do {
-            let _ = try rules.isMoveValid(board: board, move: move)
-            return move
-            
-        } catch {
-            // Invalid move, for now return nil.
-            // Maybe do error propagation in the future depending on how the game loop
-            // will be handled.
-            return nil
-        }
+        return move
     }
 }
