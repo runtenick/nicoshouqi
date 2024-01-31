@@ -103,12 +103,28 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         XCTAssertTrue(try rules.isMoveValid(board: board, fromRow: 0, fromColumn: 1, toRow: 1, toColumn: 1))
     }
     
+    /// Tests if a move is valid, for given move
     func testIsMoveValidFromMove_ValidMove() throws {
         /// Arrange
         let validMove: Move = Move(owner: .player1, rowOrigin: 0, columnOrigin: 1, rowDestination: 1, columnDestination: 1)
         
         /// Act & Assert
         XCTAssertTrue(try rules.isMoveValid(board: board, move: validMove))
+    }
+    
+    /// Tests isGameOver function
+    public func testIsGameOver_denReached() {
+        // Arrange
+        let board = createSampleBoard(boardType: "pieceOnDen")
+        let rules = VerySimpleRules()
+        let expectedResult = (true, Result.winner(winningReason: .denReached))
+        
+        // Act
+        let result = rules.isGameOver(board: board, lastRow: 4, lastColumn: 2, currentPlayer: .player2)
+        
+        // Assert
+        XCTAssertEqual(result.0, expectedResult.0)
+        XCTAssertEqual(result.1, expectedResult.1)
     }
     
     private func createSampleBoard(boardType: String) -> Board {
@@ -132,6 +148,15 @@ final class VerySimpleRulesUnitTest: XCTestCase {
                     [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)]
                 ]
                 return Board(grid: grid)!
+        case "pieceOnDen" :
+            let grid: [[Cell]] = [
+                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
+                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den, piece: Piece(owner: .player1, animal: .rat)), Cell(cellType: .jungle), Cell(cellType: .jungle)]
+            ]
+            return Board(grid: grid)!
         default :
             return VerySimpleRules.createBoard()
         }

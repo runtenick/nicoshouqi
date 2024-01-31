@@ -17,6 +17,7 @@ public struct Board : Hashable {
         lboard.grid == rboard.grid
     }
     
+    // combiner le hash de chaque attribut
     public func hash(into hasher: inout Hasher) {
         hasher.combine(nbRows)
         hasher.combine(nbColumns)
