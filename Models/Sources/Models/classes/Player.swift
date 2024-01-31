@@ -9,8 +9,8 @@ import Foundation
 
 /// A player in the game.
 public class Player {
-    let id: Owner
-    let name: String
+    public let id: Owner
+    public let name: String
     
     /// Initializes a new instance of the `Player` class.
     /// - Parameters:

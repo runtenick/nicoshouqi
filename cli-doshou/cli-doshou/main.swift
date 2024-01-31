@@ -30,7 +30,7 @@ func getUserInput(humanPlayer: HumanPlayer) -> Move {
     let toColumn = Int(readLine() ?? "") ?? 0
     
     // Create and return the Move object
-    return Move(owner: .player1, rowOrigin: fromRow, columnOrigin: fromColumn, rowDestination: toRow, columnDestination: toColumn)
+    return Move(owner: humanPlayer.id, rowOrigin: fromRow, columnOrigin: fromColumn, rowDestination: toRow, columnDestination: toColumn)
 }
 
 if let player1 = HumanPlayer(withId: .player1, andName: "player one", andInputMethod: getUserInput) {
