@@ -56,10 +56,39 @@ if let bot = RandomPlayer(withId: .player2, andName: "boto") {
 
 var lastRow: Int = 0
 var lastColumn: Int = 0
-var currentPlayer: Owner = .noOne
+
+var playerOne = RandomPlayer(withId: .player1, andName: "boto")!
+var playerTwo = RandomPlayer(withId: .player2, andName: "bota")!
+var currentPlayer: Player = playerOne
+var nextPlayer: Owner
+
 
 // - GAME LOOP -
-while(!rules.isGameOver(board: board, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer).0) {
+while(!rules.isGameOver(board: board, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id).0) {
+    
+    // Get the next player
+    nextPlayer = rules.getNextPlayer()
+    currentPlayer = playerOne.id == nextPlayer ? playerOne : playerTwo
+    
+    // Choose a move
+    var moveValidFlag = false
+    if var move = currentPlayer.chooseMove(in: board, with: rules) {
+        print("Move was choosen: \(move)")
+        while(moveValidFlag == false) {
+            do {
+                var moveValidFlag = try rules.isMoveValid(board: board, move: move)
+                
+            } catch {
+                print("Chosen move was not valid. Trying again...")
+            }
+        }
+        
+    } else {
+        // if move is nil it means there are no moves avaible (since we are using bots)
+        var res = rules.isGameOver(board: board, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
+    }
+    
+    
     
 }
 
