@@ -81,10 +81,6 @@ public struct Board : Hashable {
     /// - Returns: A `BoardResult` indicating the success or failure of the operation.
     public mutating func insertPiece(piece: Piece, atRow: Int, andColumn: Int) -> BoardResult {
         // Check if out of bounds
-        /*if atRow < 0 || atRow >= nbRows || andColumn < 0 || andColumn >= nbColumns {
-            return .failed(reason: .outOfBounds)
-        }*/
-        
         guard atRow >= 0, atRow < nbRows, andColumn >= 0, andColumn < nbColumns else {
             return .failed(reason: .outOfBounds)
         }
@@ -98,7 +94,7 @@ public struct Board : Hashable {
         // Insert the piece
         let currentCell = grid[atRow][andColumn]
         grid[atRow][andColumn] = Cell(cellType: currentCell.cellType, piece: piece)
-        
+
         return .ok
     }
     
