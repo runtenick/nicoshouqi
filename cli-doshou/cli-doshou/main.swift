@@ -61,7 +61,7 @@ var rules = VerySimpleRules()
 var theBoard = VerySimpleRules.createBoard()
 
 print("starting board : ")
-print(theBoard.classique)
+print(theBoard)
 
 var lastRow: Int = 0
 var lastColumn: Int = 0
@@ -156,7 +156,7 @@ gameLoop: while(!rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn:
         
         // a move was officially played
         print("New Board")
-        print(theBoard.classique)
+        print(theBoard)
         print("\n")
     }
     

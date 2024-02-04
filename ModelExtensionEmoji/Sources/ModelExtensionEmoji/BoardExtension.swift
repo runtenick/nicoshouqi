@@ -8,8 +8,8 @@
 import Foundation
 import Models
 
-public extension Board {
-     var classique: String {
+extension Board: CustomStringConvertible {
+     public var description: String {
         var board = ""
         for row in self.grid {
             for cell in row {
