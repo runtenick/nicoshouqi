@@ -71,3 +71,18 @@ Suggestions to listen too, while writting some tutorials or courses...
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+>>>>>>> main
