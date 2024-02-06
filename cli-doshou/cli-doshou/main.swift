@@ -60,9 +60,6 @@ func getUserInput(humanPlayer: HumanPlayer) -> Move {
 var rules = VerySimpleRules()
 var theBoard = VerySimpleRules.createBoard()
 
-print("starting board : ")
-print(theBoard)
-
 var lastRow: Int = 0
 var lastColumn: Int = 0
 
@@ -73,14 +70,26 @@ var currentPlayer: Player = playerOne
 var nextPlayer: Owner
 
 // Notifications test
-func gameStarted() -> Void {
+var game = Game(withRules: rules, andPlayer1: playerOne, andPlayer2: playerTwo)
+
+// GAME STARTED
+func gameStarted(board: Board) -> Void {
+    print(board)
+    
     print("**************************************")
     print("        ==>> GAME STARTS! <<==        ")
     print("**************************************")
 }
 
-var game = Game(withRules: rules, andPlayer1: playerOne, andPlayer2: playerTwo)
-game.addGameStartedListener(listener: gameStarted)
+game.addGameStartedListener(callback: gameStarted)
+
+// NEXT PLAYER
+func nextPlayer(board: Board, player: Player) {
+    print("**************************************")
+    print("Player \(player.id) - \(player.name), it's your turn!")
+    print("**************************************")
+}
+game.addPlayerNotification(callback: nextPlayer)
 
 try game.start()
 

@@ -14,7 +14,8 @@ public struct Game {
     public let player1 : Player
     public let player2 : Player
     
-    public var gameStartedNotification: (() -> Void)? = nil
+    public var gameStartedNotification: ((Board) -> Void)? = nil
+    public var nextPlayerNotification: ((Board, Player) -> Void)? = nil
     
     public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
         self.rules = rules
@@ -24,8 +25,12 @@ public struct Game {
         self.theBoard = type(of: rules).createBoard()
     }
     
-    public mutating func addGameStartedListener(listener: @escaping () -> Void) {
-        self.gameStartedNotification = listener
+    public mutating func addGameStartedListener(callback: @escaping (Board) -> Void) {
+        self.gameStartedNotification = callback
+    }
+    
+    public mutating func addPlayerNotification(callback: @escaping (Board, Player) -> Void) {
+        self.nextPlayerNotification = callback
     }
     
     /// The game loop starter function.
@@ -46,7 +51,7 @@ public struct Game {
         
         // Game started notification
         if let gameStartedNotification {
-            gameStartedNotification()
+            gameStartedNotification(self.theBoard)
         }
         
         gameLoop: while game_result.0 == false {
@@ -54,6 +59,11 @@ public struct Game {
             // Get the next player
             nextPlayerId = rules.getNextPlayer()
             currentPlayer = self.getPlayer(playerId: nextPlayerId)
+            
+            // Next player notification
+            if let nextPlayerNotification {
+                nextPlayerNotification(self.theBoard, currentPlayer)
+            }
             
             var isMoveValid = false // move is valid flag
             
