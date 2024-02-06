@@ -35,8 +35,12 @@ public struct Game {
     
     /// The game loop starter function.
     public mutating func start() throws {
-        // Copy pasted my cli main loop
         // ! - Rework in progress - !
+        
+        // Game started notification
+        if let gameStartedNotification {
+            gameStartedNotification(self.theBoard)
+        }
         
         // setup
         var currentPlayer: Player = self.player1 // the current player holder
@@ -49,13 +53,7 @@ public struct Game {
         // the result holder
         var game_result: (Bool, Result) = (false, .notFinished)
         
-        // Game started notification
-        if let gameStartedNotification {
-            gameStartedNotification(self.theBoard)
-        }
-        
-        gameLoop: while game_result.0 == false {
-            
+        while game_result.0 == false {
             // Get the next player
             nextPlayerId = rules.getNextPlayer()
             currentPlayer = self.getPlayer(playerId: nextPlayerId)
@@ -65,44 +63,39 @@ public struct Game {
                 nextPlayerNotification(self.theBoard, currentPlayer)
             }
             
-            var isMoveValid = false // move is valid flag
-            
-            // loop until move is valid or no moves left
-            while isMoveValid == false {
-                // Choose a move
-                if let move = currentPlayer.chooseMove(in: theBoard, with: rules) {
-                    // A move was found
-                    print("[a move was found] \n \(move) \n")
-                    
-                    // Check if valid
-                    do {
-                        isMoveValid = try rules.isMoveValid(board: theBoard, move: move)
-                        
-                        // move is valid since no error watch caught
-                        print("\n [move valid] \n \(move) \n")
-                        
-                        // save board
-                        let board_before_move = theBoard
-                        
-                        // play the move
+            guard let move = currentPlayer.chooseMove(in: theBoard, with: rules) else {
+                // no moves were found, therefore the game is over
+                game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
+                break
+            }
+        
+            // Keep asking for a move until valid
+            while true {
+                guard let move = currentPlayer.chooseMove(in: theBoard, with: rules) else {
+                    // No moves were found therefore the game is over
+                    game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
+                    break
+                }
+                
+                // Check if valid
+                do {
+                    let isMoveValid = try rules.isMoveValid(board: theBoard, move: move)
+                    if isMoveValid {
+                        // then play the move
                         let rowDest = move.rowDestination
                         let colDest = move.columnDestination
                         let rowOr = move.rowOrigin
                         let colOr = move.columnOrigin
                         
-                        print("origin cell \(theBoard.grid[rowOr][colOr])")
-                        print("destination cell \(theBoard.grid[rowDest][colDest])")
+                        // save board
+                        let board_before_move = self.theBoard
                         
                         // clear destination cell
                         if let _ = theBoard.grid[rowDest][colDest].piece {
                             // if there is a piece remove it
                             let remove_result = theBoard.removePiece(atRow: rowDest, andColumn: colDest)
                             guard remove_result == .ok else {
-                                print("failed to remove a piece on destination cell, reason: \(remove_result)")
-                                print("row destination: \(rowDest)")
-                                print("column destination: \(colDest) \n")
-                                
-                                break gameLoop // stop game
+                                throw GameError.failedToRemovePiece
                             }
                         }
                         
@@ -110,21 +103,13 @@ public struct Game {
                         let piece_to_move = theBoard.grid[rowOr][colOr].piece! // move is valid so there is a piece 100%
                         let insert_result = theBoard.insertPiece(piece: piece_to_move, atRow: rowDest, andColumn: colDest)
                         guard insert_result == .ok else {
-                            print("failed to insert a piece at destination cell, reason: \(insert_result)")
-                            print("row destination: \(rowDest)")
-                            print("column destination: \(colDest) \n")
-                            
-                            break gameLoop // stop game
+                            throw GameError.failedToInsertPiece
                         }
                         
                         // remove piece on origin cell
                         let remove_result = theBoard.removePiece(atRow: rowOr, andColumn: colOr)
                         guard remove_result == .ok else {
-                            print("failed to remove a piece at origin cell, reason: \(remove_result) \n")
-                            print("row origin: \(rowOr)")
-                            print("column origin: \(colOr) \n")
-                            
-                            break gameLoop // stop game
+                            throw GameError.failedToRemovePiece
                         }
                         
                         // officially play move
@@ -134,32 +119,14 @@ public struct Game {
                         lastRow = move.rowDestination
                         lastColumn = move.columnDestination
                         
-                    } catch {
-                        print("Choosen move is not valid, try again.")
-                        isMoveValid = false
+                        // check if the game is over
+                        game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
                     }
-                } else {
-                    // No move was found, therefore game is over with noMovesLeft as a reason
-                    print("[move was nil]")
-                    print("GAME ENDED")
-                    game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
-                    print(game_result.1)
-                    break gameLoop
+                } catch {
+                    // invalid move so continue the loop
                 }
-                
-                // a move was officially played
-                print("New Board")
-                print(theBoard)
-                print("\n")
             }
-            
-            print("next turn...")
-            //sleep(1)
         }
-
-        print("GAME ENDED")
-        game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
-        print(game_result.1)
     }
     
     private func getPlayer(playerId id: Owner) -> Player {

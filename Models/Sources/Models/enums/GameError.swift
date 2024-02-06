@@ -11,4 +11,8 @@ import Foundation
 public enum GameError: Error {
     /// The move is invalid.
     case invalidMove
+    ///  Removing a piece failed.
+    case failedToRemovePiece
+    ///  Inserting a piece failed.
+    case failedToInsertPiece
 }
