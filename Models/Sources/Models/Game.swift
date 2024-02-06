@@ -10,22 +10,30 @@ import Foundation
 /// The game structure.
 public struct Game {
     public var rules : Rules
+    public var theBoard : Board
     public let player1 : Player
     public let player2 : Player
     
-    public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
+    public let gameStartedNotification: (() -> Void)?
+    
+    public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player,
+                gameStartedNotif: (() -> Void)? = nil) {
         self.rules = rules
         self.player1 = player1
         self.player2 = player2
+        
+        // callbacks if given
+        gameStartedNotification = gameStartedNotif
+        
+        self.theBoard = type(of: rules).createBoard()
     }
     
     /// The game loop starter function.
-    public mutating func start() {
+    public mutating func start() throws {
         // Copy pasted my cli main loop
         // ! - Rework in progress - !
         
         // setup
-        var theBoard: Board = VerySimpleRules.createBoard() // Bizzare car on perd le principe du protocole Rules
         var currentPlayer: Player = self.player1 // the current player holder
         var nextPlayerId: Owner // the next player holder
         
@@ -35,6 +43,11 @@ public struct Game {
         
         // the result holder
         var game_result: (Bool, Result) = (false, .notFinished)
+        
+        // Game started notification
+        if let gameStartedNotification {
+            gameStartedNotification()
+        }
         
         gameLoop: while game_result.0 == false {
             
@@ -121,7 +134,7 @@ public struct Game {
                     print("GAME ENDED")
                     game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
                     print(game_result.1)
-                    // break gameLoop
+                    break gameLoop
                 }
                 
                 // a move was officially played
@@ -131,7 +144,7 @@ public struct Game {
             }
             
             print("next turn...")
-            //sleep()
+            //sleep(1)
         }
 
         print("GAME ENDED")
