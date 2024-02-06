@@ -14,18 +14,18 @@ public struct Game {
     public let player1 : Player
     public let player2 : Player
     
-    public let gameStartedNotification: (() -> Void)?
+    public var gameStartedNotification: (() -> Void)? = nil
     
-    public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player,
-                gameStartedNotif: (() -> Void)? = nil) {
+    public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
         self.rules = rules
         self.player1 = player1
         self.player2 = player2
-        
-        // callbacks if given
-        gameStartedNotification = gameStartedNotif
-        
+                
         self.theBoard = type(of: rules).createBoard()
+    }
+    
+    public mutating func addGameStartedListener(listener: @escaping () -> Void) {
+        self.gameStartedNotification = listener
     }
     
     /// The game loop starter function.

@@ -79,7 +79,8 @@ func gameStarted() -> Void {
     print("**************************************")
 }
 
-var game = Game(withRules: rules, andPlayer1: playerOne, andPlayer2: playerTwo, gameStartedNotif: gameStarted)
+var game = Game(withRules: rules, andPlayer1: playerOne, andPlayer2: playerTwo)
+game.addGameStartedListener(listener: gameStarted)
 
 try game.start()
 
