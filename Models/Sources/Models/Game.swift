@@ -78,11 +78,6 @@ public struct Game {
             
             // Next player notification
             nextPlayerNotification.forEach { $0(self.theBoard, currentPlayer) }
-            
-            guard let _ = currentPlayer.chooseMove(in: theBoard, with: rules) else {
-                // no moves were found, therefore the game is over
-                game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
-                break
             }
         
             // Keep asking for a move until valid
