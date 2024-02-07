@@ -81,7 +81,7 @@ func gameStarted(board: Board) -> Void {
     print("**************************************\n")
 }
 
-game.addGameStartedListener(callback: gameStarted)
+game.addGameStartedNotification(callback: gameStarted)
 
 // NEXT PLAYER
 func nextPlayer(board: Board, player: Player) {
@@ -109,13 +109,22 @@ func isGameOverNotif(board: Board, player: Player, result: (Bool, Result)) {
 game.addIsGameOverNotification(callback: isGameOverNotif)
 
 // BOARD CHANGED
-func boardChangedNotification(newBoard board: Board) {
+func boardChangedNotif(newBoard board: Board) {
     print("**************************************")
     print("The board has changed.")
     print(board)
     print("**************************************\n")
 }
-game.addboardChangedNotification(callback: boardChangedNotification)
+game.addboardChangedNotification(callback: boardChangedNotif)
+
+// MOVE WAS CHOSEN
+func moveWasChosenNotif(chosenMove move: Move) {
+    print("**************************************")
+    print("A new move was chosen.")
+    print("Player \(move).")
+    print("**************************************\n")
+}
+game.addMoveWasChosenNotification(callback: moveWasChosenNotif)
 
 try game.start()
 
@@ -211,10 +220,6 @@ try game.start()
 //    print("next turn...")
     //sleep()
 //}
-
-print("GAME ENDED")
-let result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
-print(result.1)
 
 // -- ------ --
 

@@ -18,6 +18,7 @@ public struct Game {
     public var nextPlayerNotification: ((Board, Player) -> Void)? = nil
     public var isGameOverNotification: ((Board, Player, (Bool, Result)) -> Void)? = nil
     public var boardChangedNotification: ((Board) -> Void)? = nil
+    public var moveWasChosenNotification: ((Move) -> Void)? = nil
     
     public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
         self.rules = rules
@@ -27,7 +28,7 @@ public struct Game {
         self.theBoard = type(of: rules).createBoard()
     }
     
-    public mutating func addGameStartedListener(callback: @escaping (Board) -> Void) {
+    public mutating func addGameStartedNotification(callback: @escaping (Board) -> Void) {
         self.gameStartedNotification = callback
     }
     
@@ -41,6 +42,10 @@ public struct Game {
     
     public mutating func addboardChangedNotification(callback: @escaping (Board) -> Void) {
         self.boardChangedNotification = callback
+    }
+    
+    public mutating func addMoveWasChosenNotification(callback: @escaping (Move) -> Void) {
+        self.moveWasChosenNotification = callback
     }
     
     /// The game loop starter function.
@@ -120,6 +125,11 @@ public struct Game {
                         let remove_result = theBoard.removePiece(atRow: rowOr, andColumn: colOr)
                         guard remove_result == .ok else {
                             throw GameError.failedToRemovePiece
+                        }
+                        
+                        // Move was chosen notification
+                        if let moveWasChosenNotification {
+                            moveWasChosenNotification(move)
                         }
                         
                         // officially play move
