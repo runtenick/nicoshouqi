@@ -78,18 +78,44 @@ func gameStarted(board: Board) -> Void {
     
     print("**************************************")
     print("        ==>> GAME STARTS! <<==        ")
-    print("**************************************")
+    print("**************************************\n")
 }
 
 game.addGameStartedListener(callback: gameStarted)
 
 // NEXT PLAYER
 func nextPlayer(board: Board, player: Player) {
+    print(board)
     print("**************************************")
     print("Player \(player.id) - \(player.name), it's your turn!")
-    print("**************************************")
+    print("**************************************\n")
 }
 game.addPlayerNotification(callback: nextPlayer)
+
+// IS GAME OVER ?
+func isGameOverNotif(board: Board, player: Player, result: (Bool, Result)) {
+    if result.0 == false {
+        print("**************************************")
+        print("Game is not over yet !")
+        print("**************************************\n")
+    } else {
+        print("**************************************")
+        print("Game Over !!!")
+        print("and the winner is...\(player.name)!")
+        print("\(result.1)")
+        print("**************************************\n")
+    }
+}
+game.addIsGameOverNotification(callback: isGameOverNotif)
+
+// BOARD CHANGED
+func boardChangedNotification(newBoard board: Board) {
+    print("**************************************")
+    print("The board has changed.")
+    print(board)
+    print("**************************************\n")
+}
+game.addboardChangedNotification(callback: boardChangedNotification)
 
 try game.start()
 

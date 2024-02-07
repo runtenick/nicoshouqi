@@ -16,6 +16,8 @@ public struct Game {
     
     public var gameStartedNotification: ((Board) -> Void)? = nil
     public var nextPlayerNotification: ((Board, Player) -> Void)? = nil
+    public var isGameOverNotification: ((Board, Player, (Bool, Result)) -> Void)? = nil
+    public var boardChangedNotification: ((Board) -> Void)? = nil
     
     public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
         self.rules = rules
@@ -31,6 +33,14 @@ public struct Game {
     
     public mutating func addPlayerNotification(callback: @escaping (Board, Player) -> Void) {
         self.nextPlayerNotification = callback
+    }
+    
+    public mutating func addIsGameOverNotification(callback: @escaping (Board, Player, (Bool, Result)) -> Void) {
+        self.isGameOverNotification = callback
+    }
+    
+    public mutating func addboardChangedNotification(callback: @escaping (Board) -> Void) {
+        self.boardChangedNotification = callback
     }
     
     /// The game loop starter function.
@@ -63,7 +73,7 @@ public struct Game {
                 nextPlayerNotification(self.theBoard, currentPlayer)
             }
             
-            guard let move = currentPlayer.chooseMove(in: theBoard, with: rules) else {
+            guard let _ = currentPlayer.chooseMove(in: theBoard, with: rules) else {
                 // no moves were found, therefore the game is over
                 game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
                 break
@@ -115,17 +125,35 @@ public struct Game {
                         // officially play move
                         rules.playedMove(move: move, initialBoard: board_before_move, endingBoard: theBoard)
                         
+                        // Board changed notification
+                        if let boardChangedNotification {
+                            boardChangedNotification(theBoard)
+                        }
+                        
                         // update last row/col indexes
                         lastRow = move.rowDestination
                         lastColumn = move.columnDestination
                         
                         // check if the game is over
                         game_result = rules.isGameOver(board: theBoard, lastRow: lastRow, lastColumn: lastColumn, currentPlayer: currentPlayer.id)
+                        
+                        break
                     }
                 } catch {
                     // invalid move so continue the loop
+                    print("invalid move")
+                    continue
                 }
             }
+            
+            if let isGameOverNotification {
+                isGameOverNotification(theBoard, currentPlayer, game_result)
+            }
+        }
+        
+        // Game ended
+        if let isGameOverNotification {
+            isGameOverNotification(theBoard, currentPlayer, game_result)
         }
     }
     
