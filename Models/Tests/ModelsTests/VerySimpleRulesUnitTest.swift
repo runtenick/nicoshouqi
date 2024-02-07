@@ -34,6 +34,9 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         // Check for water and trap cells
         XCTAssertFalse(board.grid.contains { $0.contains { $0.cellType == CellType.water } })
         XCTAssertFalse(board.grid.contains { $0.contains { $0.cellType == CellType.trap } })
+        
+        XCTAssertTrue(board.grid[0][2].initialOwner == .player1)
+        XCTAssertTrue(board.grid[4][2].initialOwner == .player2)
     }
     
     /// Tests the check board function.
@@ -120,7 +123,7 @@ final class VerySimpleRulesUnitTest: XCTestCase {
         let expectedResult = (true, Result.winner(winningReason: .denReached))
         
         // Act
-        let result = rules.isGameOver(board: board, lastRow: 4, lastColumn: 2, currentPlayer: .player2)
+        let result = rules.isGameOver(board: board, lastRow: 4, lastColumn: 2, currentPlayer: .player1)
         
         // Assert
         XCTAssertEqual(result.0, expectedResult.0)
@@ -170,7 +173,7 @@ final class VerySimpleRulesUnitTest: XCTestCase {
                 [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
                 [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
                 [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .jungle)],
-                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den, piece: Piece(owner: .player1, animal: .rat)), Cell(cellType: .jungle), Cell(cellType: .jungle)]
+                [Cell(cellType: .jungle), Cell(cellType: .jungle), Cell(cellType: .den, initialOwner: .player2, piece: Piece(owner: .player1, animal: .rat)), Cell(cellType: .jungle), Cell(cellType: .jungle)]
             ]
             return Board(grid: grid)!
         default :

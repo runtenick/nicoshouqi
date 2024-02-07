@@ -93,7 +93,7 @@ public struct Board : Hashable {
         
         // Insert the piece
         let currentCell = grid[atRow][andColumn]
-        grid[atRow][andColumn] = Cell(cellType: currentCell.cellType, piece: piece)
+        grid[atRow][andColumn] = Cell(cellType: currentCell.cellType, initialOwner: currentCell.initialOwner, piece: piece)
 
         return .ok
     }
@@ -117,7 +117,7 @@ public struct Board : Hashable {
         
         // remove piece from cell
         let currentCell = grid[atRow][andColumn]
-        grid[atRow][andColumn] = Cell(cellType: currentCell.cellType)
+        grid[atRow][andColumn] = Cell(cellType: currentCell.cellType, initialOwner: currentCell.initialOwner)
         
         return .ok
     }

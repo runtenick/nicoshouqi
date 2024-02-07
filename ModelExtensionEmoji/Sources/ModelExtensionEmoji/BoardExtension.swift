@@ -15,10 +15,10 @@ extension Board: CustomStringConvertible {
             for cell in row {
                 if let piece = cell.piece {
                     // if there is a piece display animal + owner too
-                    board += "\(cell.cellType.symbol)\(piece.animal.symbol)\(piece.owner.symbol) "
+                    board += "\(cell.cellType.symbol)\(piece.animal.symbol)\(piece.owner.symbol)"
                 } else {
                     // otherwise just the cell type
-                    board += "\(cell.cellType.symbol)"
+                    board += "\(cell.cellType.symbol)    "
                 }
             }
             // prints one line, then resets board

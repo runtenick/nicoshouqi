@@ -45,6 +45,9 @@ public struct VerySimpleRules : Rules {
             
             grid.append(row)
         }
+        // last row
+        grid.append(denRow)
+        
         // add animals
         // player 1
         let lion1 = Piece(owner: .player1, animal: .lion)
@@ -66,14 +69,15 @@ public struct VerySimpleRules : Rules {
         let cat2 = Piece(owner: .player2, animal: .cat)
         let elephant2 = Piece(owner: .player2, animal: .elephant)
         
-        grid[3][0] = Cell(cellType: .jungle, initialOwner: .player2, piece: lion2)
-        grid[3][2] = Cell(cellType: .jungle, initialOwner: .player2, piece: tiger2)
+        grid[4][3] = Cell(cellType: .jungle, initialOwner: .player2, piece: lion2)
+        grid[4][1] = Cell(cellType: .jungle, initialOwner: .player2, piece: tiger2)
         grid[3][4] = Cell(cellType: .jungle, initialOwner: .player2, piece: rat2)
-        grid[1][2] = Cell(cellType: .jungle, initialOwner: .player2, piece: cat2)
-        grid[1][4] = Cell(cellType: .jungle, initialOwner: .player2, piece: elephant2)
+        grid[3][2] = Cell(cellType: .jungle, initialOwner: .player2, piece: cat2)
+        grid[3][0] = Cell(cellType: .jungle, initialOwner: .player2, piece: elephant2)
         
-        // last row
-        grid.append(denRow)
+        // setting den's initial owner
+        grid[0][2] = Cell(cellType: .den, initialOwner: .player1)
+        grid[4][2] = Cell(cellType: .den, initialOwner: .player2)
         
         // board creation
         board = Board(grid: grid)!
@@ -264,7 +268,7 @@ public struct VerySimpleRules : Rules {
         let opponent : Owner = currentPlayer == .player1 ? .player2 : .player1
         
         // Check if the last moved piece reached the opponent's den
-        if lastCell.cellType == .den && lastCell.piece?.owner != opponent {
+        if lastCell.cellType == .den && lastCell.initialOwner == opponent {
             return (true, .winner(winningReason: .denReached))
         }
         

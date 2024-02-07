@@ -17,7 +17,7 @@ import Foundation
 
 func getUserInput(humanPlayer: HumanPlayer) -> Move {
     // Prompt the user for input and read the values
-    print("Enter your move:")
+    print("Choosing move...")
     print("From row:")
     let fromRow = Int(readLine() ?? "") ?? 0
     
@@ -64,7 +64,8 @@ var lastRow: Int = 0
 var lastColumn: Int = 0
 
 var playerOne = RandomPlayer(withId: .player1, andName: "boto")!
-var playerTwo = RandomPlayer(withId: .player2, andName: "bota")!
+//var playerTwo = RandomPlayer(withId: .player2, andName: "bota")!
+var playerTwo = HumanPlayer(withId: .player2, andName: "nico", andInputMethod: getUserInput)!
 
 var currentPlayer: Player = playerOne
 var nextPlayer: Owner
@@ -75,7 +76,7 @@ var game = Game(withRules: rules, andPlayer1: playerOne, andPlayer2: playerTwo)
 // GAME STARTED
 func gameStarted(board: Board) -> Void {
     print(board)
-    
+
     print("**************************************")
     print("        ==>> GAME STARTS! <<==        ")
     print("**************************************\n")
