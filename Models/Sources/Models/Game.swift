@@ -78,7 +78,6 @@ public struct Game {
             
             // Next player notification
             nextPlayerNotification.forEach { $0(self.theBoard, currentPlayer) }
-            }
         
             // Keep asking for a move until valid
             while true {
