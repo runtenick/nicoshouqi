@@ -264,7 +264,7 @@ public struct VerySimpleRules : Rules {
         let opponent : Owner = currentPlayer == .player1 ? .player2 : .player1
         
         // Check if the last moved piece reached the opponent's den
-        if lastCell.cellType == .den && lastCell.piece?.owner != currentPlayer {
+        if lastCell.cellType == .den && lastCell.piece?.owner != opponent {
             return (true, .winner(winningReason: .denReached))
         }
         
