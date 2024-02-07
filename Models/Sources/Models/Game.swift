@@ -19,6 +19,7 @@ public struct Game {
     public var isGameOverNotification: ((Board, Player, (Bool, Result)) -> Void)? = nil
     public var boardChangedNotification: ((Board) -> Void)? = nil
     public var moveWasChosenNotification: ((Move) -> Void)? = nil
+    public var moveNotValidNotificaion: ((Move) -> Void)? = nil
     
     public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
         self.rules = rules
@@ -46,6 +47,10 @@ public struct Game {
     
     public mutating func addMoveWasChosenNotification(callback: @escaping (Move) -> Void) {
         self.moveWasChosenNotification = callback
+    }
+    
+    public mutating func addMoveNotValidNotification(callback: @escaping (Move) -> Void) {
+        self.moveNotValidNotificaion = callback
     }
     
     /// The game loop starter function.
@@ -150,8 +155,11 @@ public struct Game {
                         break
                     }
                 } catch {
+                    // Move not valid notification
+                    if let moveNotValidNotificaion {
+                        moveNotValidNotificaion(move)
+                    }
                     // invalid move so continue the loop
-                    print("invalid move")
                     continue
                 }
             }
