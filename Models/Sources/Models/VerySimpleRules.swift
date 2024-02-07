@@ -217,8 +217,8 @@ public struct VerySimpleRules : Rules {
     ///   - toRow: The row index of the destination cell.
     ///   - toColumn: The column index of the destination cell.
     /// - Returns: A boolean value indicating whether the move is valid or not.
-    public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) throws -> Bool {
-        /// Insure that the move is within the board
+    public func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int, withOwner: Owner) throws -> Bool {
+        /// Ensure that the move is within the board
         guard fromRow >= 0, fromRow <= board.nbRows, fromColumn >= 0, fromColumn <= board.nbColumns,
               toRow >= 0, toRow <= board.nbRows, toColumn >= 0, toColumn <= board.nbColumns else {
             throw GameError.invalidMove
@@ -244,6 +244,12 @@ public struct VerySimpleRules : Rules {
                 throw GameError.invalidMove
             }
         }
+        
+        /// Ensure the player is owner of the piece he is trying to move
+        guard board.grid[fromRow][fromColumn].piece?.owner == withOwner else {
+            throw GameError.invalidMove
+        }
+        
         return true
     }
     
@@ -254,7 +260,7 @@ public struct VerySimpleRules : Rules {
     ///   - move: The move to be checked.
     /// - Returns: A boolean value indicating whether the move is valid or not.
     public func isMoveValid(board: Board, move: Move) throws -> Bool {
-        return try isMoveValid(board: board, fromRow: move.rowOrigin, fromColumn: move.columnOrigin, toRow: move.rowDestination, toColumn: move.columnDestination)
+        return try isMoveValid(board: board, fromRow: move.rowOrigin, fromColumn: move.columnOrigin, toRow: move.rowDestination, toColumn: move.columnDestination, withOwner: move.owner)
     }
     
     /// Checks if a move is valid on the given board.

@@ -59,7 +59,7 @@ public protocol Rules {
     ///   - toRow: The row index of the destination cell.
     ///   - toColumn: The column index of the destination cell.
     /// - Returns: A boolean value indicating whether the move is valid or not.
-    func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int) throws -> Bool
+    func isMoveValid(board: Board, fromRow: Int, fromColumn: Int, toRow: Int, toColumn: Int, withOwner: Owner) throws -> Bool
     
     /// Checks if a move is valid on the given board.
     ///
