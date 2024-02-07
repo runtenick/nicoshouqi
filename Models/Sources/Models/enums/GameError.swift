@@ -15,4 +15,6 @@ public enum GameError: Error {
     case failedToRemovePiece
     ///  Inserting a piece failed.
     case failedToInsertPiece
+    /// A wrong id was given to get the next player.
+    case badPlayerError(badPlyaerId: String)
 }

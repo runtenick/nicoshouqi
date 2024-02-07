@@ -14,12 +14,12 @@ public struct Game {
     public let player1 : Player
     public let player2 : Player
     
-    public var gameStartedNotification: ((Board) -> Void)? = nil
-    public var nextPlayerNotification: ((Board, Player) -> Void)? = nil
-    public var isGameOverNotification: ((Board, Player, (Bool, Result)) -> Void)? = nil
-    public var boardChangedNotification: ((Board) -> Void)? = nil
-    public var moveWasChosenNotification: ((Move) -> Void)? = nil
-    public var moveNotValidNotificaion: ((Move) -> Void)? = nil
+    public var gameStartedNotification: [(Board) -> Void] = []
+    public var nextPlayerNotification: [(Board, Player) -> Void] = []
+    public var isGameOverNotification: [(Board, Player, (Bool, Result)) -> Void] = []
+    public var boardChangedNotification: [(Board) -> Void] = []
+    public var moveWasChosenNotification: [(Move) -> Void] = []
+    public var moveNotValidNotificaion: [(Move) -> Void] = []
     
     public init(withRules rules: Rules, andPlayer1 player1: Player, andPlayer2 player2: Player) {
         self.rules = rules
@@ -30,27 +30,27 @@ public struct Game {
     }
     
     public mutating func addGameStartedNotification(callback: @escaping (Board) -> Void) {
-        self.gameStartedNotification = callback
+        self.gameStartedNotification.append(callback)
     }
     
     public mutating func addPlayerNotification(callback: @escaping (Board, Player) -> Void) {
-        self.nextPlayerNotification = callback
+        self.nextPlayerNotification.append(callback)
     }
     
     public mutating func addIsGameOverNotification(callback: @escaping (Board, Player, (Bool, Result)) -> Void) {
-        self.isGameOverNotification = callback
+        self.isGameOverNotification.append(callback)
     }
     
     public mutating func addboardChangedNotification(callback: @escaping (Board) -> Void) {
-        self.boardChangedNotification = callback
+        self.boardChangedNotification.append(callback)
     }
     
     public mutating func addMoveWasChosenNotification(callback: @escaping (Move) -> Void) {
-        self.moveWasChosenNotification = callback
+        self.moveWasChosenNotification.append(callback)
     }
     
     public mutating func addMoveNotValidNotification(callback: @escaping (Move) -> Void) {
-        self.moveNotValidNotificaion = callback
+        self.moveNotValidNotificaion.append(callback)
     }
     
     /// The game loop starter function.
@@ -58,9 +58,7 @@ public struct Game {
         // ! - Rework in progress - !
         
         // Game started notification
-        if let gameStartedNotification {
-            gameStartedNotification(self.theBoard)
-        }
+        gameStartedNotification.forEach { $0(self.theBoard) }
         
         // setup
         var currentPlayer: Player = self.player1 // the current player holder
@@ -79,9 +77,7 @@ public struct Game {
             currentPlayer = self.getPlayer(playerId: nextPlayerId)
             
             // Next player notification
-            if let nextPlayerNotification {
-                nextPlayerNotification(self.theBoard, currentPlayer)
-            }
+            nextPlayerNotification.forEach { $0(self.theBoard, currentPlayer) }
             
             guard let _ = currentPlayer.chooseMove(in: theBoard, with: rules) else {
                 // no moves were found, therefore the game is over
@@ -133,17 +129,13 @@ public struct Game {
                         }
                         
                         // Move was chosen notification
-                        if let moveWasChosenNotification {
-                            moveWasChosenNotification(move)
-                        }
+                        moveWasChosenNotification.forEach { $0(move) }
                         
                         // officially play move
                         rules.playedMove(move: move, initialBoard: board_before_move, endingBoard: theBoard)
                         
                         // Board changed notification
-                        if let boardChangedNotification {
-                            boardChangedNotification(theBoard)
-                        }
+                        boardChangedNotification.forEach { $0(self.theBoard) }
                         
                         // update last row/col indexes
                         lastRow = move.rowDestination
@@ -156,23 +148,15 @@ public struct Game {
                     }
                 } catch {
                     // Move not valid notification
-                    if let moveNotValidNotificaion {
-                        moveNotValidNotificaion(move)
-                    }
+                    moveNotValidNotificaion.forEach { $0(move) }
                     // invalid move so continue the loop
                     continue
                 }
             }
-            
-            if let isGameOverNotification {
-                isGameOverNotification(theBoard, currentPlayer, game_result)
-            }
         }
         
-        // Game ended
-        if let isGameOverNotification {
-            isGameOverNotification(theBoard, currentPlayer, game_result)
-        }
+        // Is game over notification
+        isGameOverNotification.forEach { $0(self.theBoard, currentPlayer, game_result) }
     }
     
     private func getPlayer(playerId id: Owner) -> Player {
