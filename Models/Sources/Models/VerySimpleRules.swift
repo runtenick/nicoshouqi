@@ -196,7 +196,7 @@ public struct VerySimpleRules : Rules {
                 }
                 
                  do {
-                    if try isMoveValid(board: board, fromRow: fromRow, fromColumn: andColumn, toRow: newRow, toColumn: newColumn) {
+                    if try isMoveValid(board: board, fromRow: fromRow, fromColumn: andColumn, toRow: newRow, toColumn: newColumn, withOwner: owner) {
                         let move = Move(owner: owner, rowOrigin: fromRow, columnOrigin: andColumn, rowDestination: newRow, columnDestination: newColumn)
                         moves.append(move)
                     }
