@@ -29,27 +29,7 @@ swift test
 ```
 
 ## :memo: Todo list
-* tostring pour board pas de attribut classique
-* a revoir guard vs if when to use one rather than the other
-
-### TP3 - TESTS checklist
-* createBoard
-* checkBoard
-* getNextPlayer
-* getMoves1
-* getMoves2
-* isMoveValid1
-* isMoveValid2
-
-__Remaining:__  
-* isGameOver
-* playedMove
-
-* set pour verifier inserted
-* verif pieces not allowed: loup chien
-* toggle method pour getNextPlayer ?
 * Elephant corriger
-* boucle de jeux
 ---
 Suggestions to listen too, while writting some tutorials or courses... 
 
