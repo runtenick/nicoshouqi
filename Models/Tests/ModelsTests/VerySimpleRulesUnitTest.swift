@@ -103,7 +103,7 @@ final class VerySimpleRulesUnitTest: XCTestCase {
     /// Tests if a move is valid.
     func testIsMoveValid_ValidMove() throws {
         /// Act & Assert
-        XCTAssertTrue(try rules.isMoveValid(board: board, fromRow: 0, fromColumn: 1, toRow: 1, toColumn: 1))
+        XCTAssertTrue(try rules.isMoveValid(board: board, fromRow: 0, fromColumn: 1, toRow: 1, toColumn: 1, withOwner: .player1))
     }
     
     /// Tests if a move is valid, for given move
