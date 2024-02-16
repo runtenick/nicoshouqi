@@ -208,3 +208,28 @@ print(String(data: resultEnconded6, encoding: .utf8)!)
 
 let resultDecoded6 = try jsonDecoder.decode(Move.self, from: resultEnconded6)
 print(resultDecoded5)
+
+// BOARD
+print("\n test Board type")
+var grid : [[Cell]] = []
+var testBoard : Board = Board(grid: grid)!
+
+let resultEnconded7 = try jsonEncoder.encode(testBoard)
+print(testBoard)
+print(String(data: resultEnconded7, encoding: .utf8)!)
+
+let resultDecoded7 = try jsonDecoder.decode(Board.self, from: resultEnconded7)
+print(resultDecoded7)
+
+// RULES
+print("\n test Rules type")
+var testRules : Rules = VerySimpleRules()
+
+/*
+ let resultEnconded8 = try jsonEncoder.encode(testRules)
+ print(testRules)
+ print(String(data: resultEnconded8, encoding: .utf8)!)
+ 
+ let resultDecoded8 = try jsonDecoder.decode(Rules.self, from: resultEnconded8)
+ print(resultDecoded8)
+ */
