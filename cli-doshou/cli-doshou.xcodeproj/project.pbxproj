@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EC3A8E0E2B52F1FC00A47F05 /* ModelExtensionEmoji in Frameworks */ = {isa = PBXBuildFile; productRef = EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */; };
 		EC46784A2B66AB29006812B2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = EC4678492B66AB29006812B2 /* Models */; };
+		EC4B443C2B7A7A8E007B10A3 /* Persistance in Frameworks */ = {isa = PBXBuildFile; productRef = EC4B443B2B7A7A8E007B10A3 /* Persistance */; };
 		ECE2BE802B4EA72C00D222A2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2BE7F2B4EA72C00D222A2 /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC4B443C2B7A7A8E007B10A3 /* Persistance in Frameworks */,
 				EC46784A2B66AB29006812B2 /* Models in Frameworks */,
 				EC3A8E0E2B52F1FC00A47F05 /* ModelExtensionEmoji in Frameworks */,
 			);
@@ -113,6 +115,7 @@
 			packageProductDependencies = (
 				EC3A8E0D2B52F1FC00A47F05 /* ModelExtensionEmoji */,
 				EC4678492B66AB29006812B2 /* Models */,
+				EC4B443B2B7A7A8E007B10A3 /* Persistance */,
 			);
 			productName = "cli-doshou";
 			productReference = ECE2BE7C2B4EA72C00D222A2 /* cli-doshou */;
@@ -325,6 +328,10 @@
 		EC4678492B66AB29006812B2 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
+		};
+		EC4B443B2B7A7A8E007B10A3 /* Persistance */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Persistance;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
