@@ -176,3 +176,35 @@ print(String(data: resultEnconded3, encoding: .utf8)!)
 let resultDecoded3 = try jsonDecoder.decode(CellType.self, from: resultEnconded3)
 print(resultDecoded3)
 
+// PIECE
+print("\n test Piece type")
+var testPiece : Piece = Piece(owner: .player1, animal: .elephant)
+
+let resultEnconded4 = try jsonEncoder.encode(testPiece)
+print(testPiece)
+print(String(data: resultEnconded4, encoding: .utf8)!)
+
+let resultDecoded4 = try jsonDecoder.decode(Piece.self, from: resultEnconded4)
+print(resultDecoded4)
+
+// MOVE
+print("\n test Move type")
+var testMove : Move = Move(owner: .player1, rowOrigin: 0, columnOrigin: 0, rowDestination: 1, columnDestination: 0)
+
+let resultEnconded5 = try jsonEncoder.encode(testMove)
+print(testMove)
+print(String(data: resultEnconded5, encoding: .utf8)!)
+
+let resultDecoded5 = try jsonDecoder.decode(Move.self, from: resultEnconded5)
+print(resultDecoded5)
+
+// CELL
+print("\n test Cell type")
+var testCell : Cell = Cell(cellType: .trap)
+
+let resultEnconded6 = try jsonEncoder.encode(testMove)
+print(testMove)
+print(String(data: resultEnconded6, encoding: .utf8)!)
+
+let resultDecoded6 = try jsonDecoder.decode(Move.self, from: resultEnconded6)
+print(resultDecoded5)
