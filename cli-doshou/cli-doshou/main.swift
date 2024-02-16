@@ -143,6 +143,7 @@ import Foundation
 var jsonEncoder = JSONEncoder()
 var jsonDecoder = JSONDecoder()
 
+// ANIMAL
 var testAnimal : Animal = .cat
 
 let resultEnconded = try jsonEncoder.encode(testAnimal.rawValue)
@@ -151,4 +152,27 @@ print(String(data: resultEnconded, encoding: .utf8)!)
 
 let resultDecoded = try jsonDecoder.decode(Animal.self, from: resultEnconded)
 print(resultDecoded)
+
+// OWNER
+print("\n test owner")
+var testOwner : Owner = .player1
+
+let resultEnconded2 = try jsonEncoder.encode(testOwner)
+print(testOwner)
+print(String(data: resultEnconded2, encoding: .utf8)!)
+
+let resultDecoded2 = try jsonDecoder.decode(Owner.self, from: resultEnconded2)
+print(resultDecoded2)
+
+
+// CELLTYPE
+print("\n test cell type")
+var testCellType : CellType = .den
+
+let resultEnconded3 = try jsonEncoder.encode(testCellType)
+print(testCellType)
+print(String(data: resultEnconded3, encoding: .utf8)!)
+
+let resultDecoded3 = try jsonDecoder.decode(CellType.self, from: resultEnconded3)
+print(resultDecoded3)
 
